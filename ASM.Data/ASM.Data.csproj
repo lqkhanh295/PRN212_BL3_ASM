@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13.0</LangVersion>
+  </PropertyGroup>
+
+  <!-- Tham chiếu đến project Entities để sử dụng các Model -->
+  <ItemGroup>
+    <ProjectReference Include="..\ASM.Entities\ASM.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

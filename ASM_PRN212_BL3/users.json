@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Username": "admin",
+    "Password": "admin123",
+    "DisplayName": "Quan Tri Vien",
+    "Role": 1,
+    "CreatedDate": "2024-01-01T00:00:00"
+  },
+  {
+    "Id": 2,
+    "Username": "student",
+    "Password": "student123",
+    "DisplayName": "Sinh Vien Demo",
+    "Role": 0,
+    "CreatedDate": "2024-01-01T00:00:00"
+  },
+  {
+    "Id": 3,
+    "Username": "user1",
+    "Password": "123456",
+    "DisplayName": "Nguyen Van A",
+    "Role": 0,
+    "CreatedDate": "2024-01-10T00:00:00"
+  }
+]

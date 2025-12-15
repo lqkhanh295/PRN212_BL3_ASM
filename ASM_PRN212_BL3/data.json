@@ -1,0 +1,101 @@
+[
+  {
+    "Id": 1,
+    "Name": "Tieng Anh Co Ban",
+    "CreatedDate": "2024-01-15T10:00:00",
+    "Flashcards": [
+      {
+        "Id": 1,
+        "Term": "Hello",
+        "Definition": "Xin chao",
+        "IsBookmarked": false
+      },
+      {
+        "Id": 2,
+        "Term": "Goodbye",
+        "Definition": "Tam biet",
+        "IsBookmarked": true
+      },
+      {
+        "Id": 3,
+        "Term": "Thank you",
+        "Definition": "Cam on",
+        "IsBookmarked": false
+      },
+      {
+        "Id": 4,
+        "Term": "Sorry",
+        "Definition": "Xin loi",
+        "IsBookmarked": false
+      },
+      {
+        "Id": 5,
+        "Term": "Please",
+        "Definition": "Lam on",
+        "IsBookmarked": false
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Name": "Tu vung TOEIC",
+    "CreatedDate": "2024-01-16T14:30:00",
+    "Flashcards": [
+      {
+        "Id": 1,
+        "Term": "Agreement",
+        "Definition": "Thoa thuan, hop dong",
+        "IsBookmarked": true
+      },
+      {
+        "Id": 2,
+        "Term": "Appointment",
+        "Definition": "Cuoc hen",
+        "IsBookmarked": false
+      },
+      {
+        "Id": 3,
+        "Term": "Budget",
+        "Definition": "Ngan sach",
+        "IsBookmarked": false
+      },
+      {
+        "Id": 4,
+        "Term": "Conference",
+        "Definition": "Hoi nghi",
+        "IsBookmarked": true
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Name": "Tieng Nhat N5",
+    "CreatedDate": "2024-01-17T09:00:00",
+    "Flashcards": [
+      {
+        "Id": 1,
+        "Term": "Arigatou",
+        "Definition": "Cam on",
+        "IsBookmarked": true
+      },
+      {
+        "Id": 2,
+        "Term": "Sumimasen",
+        "Definition": "Xin loi / Xin phep",
+        "IsBookmarked": false
+      },
+      {
+        "Id": 3,
+        "Term": "Ohayou",
+        "Definition": "Chao buoi sang",
+        "IsBookmarked": false
+      },
+      {
+        "Id": 4,
+        "Term": "Konnichiwa",
+        "Definition": "Xin chao (ban ngay)",
+        "IsBookmarked": false
+      }
+    ]
+  }
+]
