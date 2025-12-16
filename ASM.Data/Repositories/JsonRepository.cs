@@ -1,102 +1,102 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using ASM.Entities.Models;
 
 namespace ASM.Data.Repositories
 {
     /// <summary>
-    /// Repository ch?u tr�ch nhi?m ??c/ghi d? li?u t? file JSON
-    /// ?�y l� t?ng Data Access Layer (DAL) - ch? l�m vi?c v?i d? li?u
+    /// Repository chịu trách nhiệm đọc/ghi dữ liệu từ file JSON
+    /// Đây là tầng Data Access Layer (DAL) - chỉ làm việc với dữ liệu
     /// </summary>
     public class JsonRepository
     {
-        // ???ng d?n file JSON l?u tr? d? li?u
+        // Đường dẫn file JSON lưu trữ dữ liệu
         private readonly string _filePath;
 
-        // C?u h�nh JSON ?? format ??p khi ghi file
+        // Cấu hình JSON để format đẹp khi ghi file
         private readonly JsonSerializerOptions _jsonOptions;
 
         /// <summary>
-        /// Constructor - kh?i t?o repository v?i ???ng d?n file m?c ??nh
+        /// Constructor - khởi tạo repository với đường dẫn file mặc định
         /// </summary>
         public JsonRepository()
         {
-            // File data.json ???c l?u c�ng th? m?c v?i ?ng d?ng
+            // File data.json được lưu cùng thư mục với ứng dụng
             _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data.json");
 
-            // C?u h�nh JSON: indent ?? d? ??c, cho ph�p ti?ng Vi?t
+            // Cấu hình JSON: indent để dễ đọc, cho phép tiếng Việt
             _jsonOptions = new JsonSerializerOptions
             {
-                WriteIndented = true, // Format JSON ??p, d? ??c
-                PropertyNameCaseInsensitive = true, // Kh�ng ph�n bi?t hoa th??ng khi ??c
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // H? tr? ti?ng Vi?t
+                WriteIndented = true, // Format JSON đẹp, dễ đọc
+                PropertyNameCaseInsensitive = true, // Không phân biệt hoa thường khi đọc
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // Hỗ trợ tiếng Việt
             };
         }
 
         /// <summary>
-        /// ??c t?t c? c�c Deck t? file JSON
+        /// Đọc tất cả các Deck từ file JSON
         /// </summary>
-        /// <returns>Danh s�ch Deck, tr? v? list r?ng n?u file ch?a t?n t?i</returns>
+        /// <returns>Danh sách Deck, trả về list rỗng nếu file chưa tồn tại</returns>
         public List<Deck> GetAllDecks()
         {
             try
             {
-                // Ki?m tra file c� t?n t?i kh�ng
+                // Kiểm tra file có tồn tại không
                 if (!File.Exists(_filePath))
                 {
-                    // File ch?a c� -> tr? v? list r?ng
+                    // File chưa có -> trả về list rỗng
                     return new List<Deck>();
                 }
 
-                // ??c n?i dung file
+                // Đọc nội dung file
                 string jsonContent = File.ReadAllText(_filePath);
 
-                // N?u file r?ng -> tr? v? list r?ng
+                // Nếu file rỗng -> trả về list rỗng
                 if (string.IsNullOrWhiteSpace(jsonContent))
                 {
                     return new List<Deck>();
                 }
 
-                // Chuy?n ??i JSON th�nh List<Deck>
+                // Chuyển đổi JSON thành List<Deck>
                 var decks = JsonSerializer.Deserialize<List<Deck>>(jsonContent, _jsonOptions);
 
-                // Tr? v? list deck ho?c list r?ng n?u null
+                // Trả về list deck hoặc list rỗng nếu null
                 return decks ?? new List<Deck>();
             }
             catch (Exception ex)
             {
-                // Ghi log l?i (trong th?c t? n�n d�ng logging framework)
-                Console.WriteLine($"L?i khi ??c file JSON: {ex.Message}");
+                // Ghi log lỗi (trong thực tế nên dùng logging framework)
+                Console.WriteLine($"Lỗi khi đọc file JSON: {ex.Message}");
                 return new List<Deck>();
             }
         }
 
         /// <summary>
-        /// L?u t?t c? Deck xu?ng file JSON (ghi ?� to�n b?)
+        /// Lưu tất cả Deck xuống file JSON (ghi đè toàn bộ)
         /// </summary>
-        /// <param name="decks">Danh s�ch Deck c?n l?u</param>
-        /// <returns>True n?u l?u th�nh c�ng, False n?u c� l?i</returns>
+        /// <param name="decks">Danh sách Deck cần lưu</param>
+        /// <returns>True nếu lưu thành công, False nếu có lỗi</returns>
         public bool SaveAllDecks(List<Deck> decks)
         {
             try
             {
-                // Chuy?n ??i List<Deck> th�nh chu?i JSON
+                // Chuyển đổi List<Deck> thành chuỗi JSON
                 string jsonContent = JsonSerializer.Serialize(decks, _jsonOptions);
 
-                // Ghi ?� xu?ng file
+                // Ghi đè xuống file
                 File.WriteAllText(_filePath, jsonContent);
 
                 return true;
             }
             catch (Exception ex)
             {
-                // Ghi log l?i
-                Console.WriteLine($"L?i khi ghi file JSON: {ex.Message}");
+                // Ghi log lỗi
+                Console.WriteLine($"Lỗi khi ghi file JSON: {ex.Message}");
                 return false;
             }
         }
 
         /// <summary>
-        /// L?y ???ng d?n file data.json (?? debug ho?c hi?n th? cho user)
+        /// Lấy đường dẫn file data.json (để debug hoặc hiển thị cho user)
         /// </summary>
         public string GetDataFilePath() => _filePath;
     }

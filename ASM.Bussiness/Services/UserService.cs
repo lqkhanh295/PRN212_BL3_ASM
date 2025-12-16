@@ -1,16 +1,16 @@
-using ASM.Data.Repositories;
+﻿using ASM.Data.Repositories;
 using ASM.Entities.Models;
 
 namespace ASM.Bussiness.Services
 {
     /// <summary>
-    /// Service xu ly nghiep vu lien quan den nguoi dung
+    /// Service xử lý nghiệp vụ liên quan đến người dùng
     /// </summary>
     public class UserService
     {
         private readonly UserRepository _userRepository;
 
-        // Nguoi dung hien tai dang dang nhap (static de dung chung)
+        // Người dùng hiện tại đang đăng nhập (static để dùng chung)
         private static User? _currentUser;
 
         public UserService()
@@ -19,26 +19,26 @@ namespace ASM.Bussiness.Services
         }
 
         /// <summary>
-        /// Lay nguoi dung hien tai
+        /// Lấy người dùng hiện tại
         /// </summary>
         public static User? CurrentUser => _currentUser;
 
         /// <summary>
-        /// Kiem tra nguoi dung hien tai co phai Admin khong
+        /// Kiểm tra người dùng hiện tại có phải Admin không
         /// </summary>
         public static bool IsAdmin => _currentUser?.Role == UserRole.Admin;
 
         /// <summary>
-        /// Kiem tra nguoi dung hien tai co phai Student khong
+        /// Kiểm tra người dùng hiện tại có phải Student không
         /// </summary>
         public static bool IsStudent => _currentUser?.Role == UserRole.Student;
 
         /// <summary>
-        /// Dang nhap vao he thong
+        /// Đăng nhập vào hệ thống
         /// </summary>
-        /// <param name="username">Ten dang nhap</param>
-        /// <param name="password">Mat khau</param>
-        /// <returns>User neu thanh cong, null neu that bai</returns>
+        /// <param name="username">Tên đăng nhập</param>
+        /// <param name="password">Mật khẩu</param>
+        /// <returns>User nếu thành công, null nếu thất bại</returns>
         public User? Login(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -51,11 +51,12 @@ namespace ASM.Bussiness.Services
             {
                 _currentUser = user;
             }
+
             return user;
         }
 
         /// <summary>
-        /// Dang xuat khoi he thong
+        /// Đăng xuất khỏi hệ thống
         /// </summary>
         public void Logout()
         {
@@ -63,7 +64,7 @@ namespace ASM.Bussiness.Services
         }
 
         /// <summary>
-        /// Lay tat ca nguoi dung
+        /// Lấy tất cả người dùng
         /// </summary>
         public List<User> GetAllUsers()
         {
@@ -71,7 +72,7 @@ namespace ASM.Bussiness.Services
         }
 
         /// <summary>
-        /// Tao tai khoan moi
+        /// Tạo tài khoản mới
         /// </summary>
         public User? Register(string username, string password, string displayName, UserRole role = UserRole.Student)
         {
@@ -80,11 +81,11 @@ namespace ASM.Bussiness.Services
                 return null;
             }
 
-            // Kiem tra username da ton tai chua
+            // Kiểm tra username đã tồn tại chưa
             var existingUser = _userRepository.GetUserByUsername(username);
             if (existingUser != null)
             {
-                return null; // Username da ton tai
+                return null; // Username đã tồn tại
             }
 
             var users = _userRepository.GetAllUsers();

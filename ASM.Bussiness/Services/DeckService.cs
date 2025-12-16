@@ -1,41 +1,41 @@
-using ASM.Data.Repositories;
+﻿using ASM.Data.Repositories;
 using ASM.Entities.Models;
 
 namespace ASM.Bussiness.Services
 {
     /// <summary>
-    /// Service x? l� nghi?p v? li�n quan ??n Deck v� Flashcard
-    /// ?�y l� t?ng Business Logic Layer (BLL) - x? l� logic nghi?p v?
+    /// Service xử lý nghiệp vụ liên quan đến Deck và Flashcard
+    /// Đây là tầng Business Logic Layer (BLL) - xử lý logic nghiệp vụ
     /// </summary>
     public class DeckService
     {
-        // Repository ?? truy c?p d? li?u (t?ng DAL)
+        // Repository để truy cập dữ liệu (tầng DAL)
         private readonly JsonRepository _repository;
 
         /// <summary>
-        /// Constructor - kh?i t?o service v?i repository
+        /// Constructor - khởi tạo service với repository
         /// </summary>
         public DeckService()
         {
             _repository = new JsonRepository();
         }
 
-        #region Deck Operations (Thao t�c v?i b? th?)
+        #region Deck Operations (Thao tác với bộ thẻ)
 
         /// <summary>
-        /// L?y t?t c? c�c b? th?
+        /// Lấy tất cả các bộ thẻ
         /// </summary>
-        /// <returns>Danh s�ch t?t c? Deck</returns>
+        /// <returns>Danh sách tất cả Deck</returns>
         public List<Deck> GetAllDecks()
         {
             return _repository.GetAllDecks();
         }
 
         /// <summary>
-        /// L?y m?t b? th? theo ID
+        /// Lấy một bộ thẻ theo ID
         /// </summary>
-        /// <param name="deckId">ID c?a b? th? c?n t�m</param>
-        /// <returns>Deck n?u t�m th?y, null n?u kh�ng</returns>
+        /// <param name="deckId">ID của bộ thẻ cần tìm</param>
+        /// <returns>Deck nếu tìm thấy, null nếu không</returns>
         public Deck? GetDeckById(int deckId)
         {
             var decks = _repository.GetAllDecks();
@@ -43,25 +43,25 @@ namespace ASM.Bussiness.Services
         }
 
         /// <summary>
-        /// T?o m?t b? th? m?i
+        /// Tạo một bộ thẻ mới
         /// </summary>
-        /// <param name="name">T�n b? th?</param>
-        /// <returns>Deck v?a t?o, null n?u th?t b?i</returns>
+        /// <param name="name">Tên bộ thẻ</param>
+        /// <returns>Deck vừa tạo, null nếu thất bại</returns>
         public Deck? CreateDeck(string name)
         {
-            // Validate: t�n kh�ng ???c r?ng
+            // Validate: tên không được rỗng
             if (string.IsNullOrWhiteSpace(name))
             {
                 return null;
             }
 
-            // L?y danh s�ch deck hi?n t?i t? DAL
+            // Lấy danh sách deck hiện tại từ DAL
             var decks = _repository.GetAllDecks();
 
-            // T?o ID m?i (l?y max ID + 1, ho?c 1 n?u ch?a c� deck n�o)
+            // Tạo ID mới (lấy max ID + 1, hoặc 1 nếu chưa có deck nào)
             int newId = decks.Any() ? decks.Max(d => d.Id) + 1 : 1;
 
-            // T?o deck m?i
+            // Tạo deck mới
             var newDeck = new Deck
             {
                 Id = newId,
@@ -70,10 +70,10 @@ namespace ASM.Bussiness.Services
                 Flashcards = new List<Flashcard>()
             };
 
-            // Th�m v�o danh s�ch
+            // Thêm vào danh sách
             decks.Add(newDeck);
 
-            // L?u xu?ng DAL
+            // Lưu xuống DAL
             if (_repository.SaveAllDecks(decks))
             {
                 return newDeck;
@@ -83,11 +83,11 @@ namespace ASM.Bussiness.Services
         }
 
         /// <summary>
-        /// C?p nh?t t�n b? th?
+        /// Cập nhật tên bộ thẻ
         /// </summary>
-        /// <param name="deckId">ID b? th? c?n c?p nh?t</param>
-        /// <param name="newName">T�n m?i</param>
-        /// <returns>True n?u th�nh c�ng</returns>
+        /// <param name="deckId">ID bộ thẻ cần cập nhật</param>
+        /// <param name="newName">Tên mới</param>
+        /// <returns>True nếu thành công</returns>
         public bool UpdateDeck(int deckId, string newName)
         {
             if (string.IsNullOrWhiteSpace(newName))
@@ -108,10 +108,10 @@ namespace ASM.Bussiness.Services
         }
 
         /// <summary>
-        /// X�a m?t b? th?
+        /// Xóa một bộ thẻ
         /// </summary>
-        /// <param name="deckId">ID b? th? c?n x�a</param>
-        /// <returns>True n?u x�a th�nh c�ng</returns>
+        /// <param name="deckId">ID bộ thẻ cần xóa</param>
+        /// <returns>True nếu xóa thành công</returns>
         public bool DeleteDeck(int deckId)
         {
             var decks = _repository.GetAllDecks();
@@ -128,14 +128,14 @@ namespace ASM.Bussiness.Services
 
         #endregion
 
-        #region Flashcard Operations (Thao t�c v?i th?)
+        #region Flashcard Operations (Thao tác với thẻ)
 
         /// <summary>
-        /// Th�m m?t th? m?i v�o b? th?
+        /// Thêm một thẻ mới vào bộ thẻ
         /// </summary>
-        /// <param name="deckId">ID b? th?</param>
-        /// <param name="card">Th? c?n th�m</param>
-        /// <returns>True n?u th�m th�nh c�ng</returns>
+        /// <param name="deckId">ID bộ thẻ</param>
+        /// <param name="card">Thẻ cần thêm</param>
+        /// <returns>True nếu thêm thành công</returns>
         public bool AddCardToDeck(int deckId, Flashcard card)
         {
             // Validate input
@@ -144,36 +144,36 @@ namespace ASM.Bussiness.Services
                 return false;
             }
 
-            // L?y danh s�ch deck t? DAL
+            // Lấy danh sách deck từ DAL
             var decks = _repository.GetAllDecks();
 
-            // T�m deck c?n th�m th?
+            // Tìm deck cần thêm thẻ
             var deck = decks.FirstOrDefault(d => d.Id == deckId);
             if (deck == null)
             {
                 return false;
             }
 
-            // T?o ID m?i cho th?
-            int newCardId = deck.Flashcards.Any() 
-                ? deck.Flashcards.Max(f => f.Id) + 1 
+            // Tạo ID mới cho thẻ
+            int newCardId = deck.Flashcards.Any()
+                ? deck.Flashcards.Max(f => f.Id) + 1
                 : 1;
 
             card.Id = newCardId;
 
-            // Th�m th? v�o deck
+            // Thêm thẻ vào deck
             deck.Flashcards.Add(card);
 
-            // L?u xu?ng DAL
+            // Lưu xuống DAL
             return _repository.SaveAllDecks(decks);
         }
 
         /// <summary>
-        /// C?p nh?t m?t th? flashcard
+        /// Cập nhật một thẻ flashcard
         /// </summary>
-        /// <param name="deckId">ID b? th? ch?a th?</param>
-        /// <param name="card">Th? v?i th�ng tin m?i</param>
-        /// <returns>True n?u c?p nh?t th�nh c�ng</returns>
+        /// <param name="deckId">ID bộ thẻ chứa thẻ</param>
+        /// <param name="card">Thẻ với thông tin mới</param>
+        /// <returns>True nếu cập nhật thành công</returns>
         public bool UpdateCard(int deckId, Flashcard card)
         {
             if (card == null)
@@ -195,7 +195,7 @@ namespace ASM.Bussiness.Services
                 return false;
             }
 
-            // C?p nh?t th�ng tin th?
+            // Cập nhật thông tin thẻ
             existingCard.Term = card.Term;
             existingCard.Definition = card.Definition;
             existingCard.IsBookmarked = card.IsBookmarked;
@@ -204,11 +204,11 @@ namespace ASM.Bussiness.Services
         }
 
         /// <summary>
-        /// X�a m?t th? kh?i b? th?
+        /// Xóa một thẻ khỏi bộ thẻ
         /// </summary>
-        /// <param name="deckId">ID b? th?</param>
-        /// <param name="cardId">ID th? c?n x�a</param>
-        /// <returns>True n?u x�a th�nh c�ng</returns>
+        /// <param name="deckId">ID bộ thẻ</param>
+        /// <param name="cardId">ID thẻ cần xóa</param>
+        /// <returns>True nếu xóa thành công</returns>
         public bool DeleteCard(int deckId, int cardId)
         {
             var decks = _repository.GetAllDecks();
@@ -230,11 +230,11 @@ namespace ASM.Bussiness.Services
         }
 
         /// <summary>
-        /// Toggle bookmark cho m?t th?
+        /// Toggle bookmark cho một thẻ
         /// </summary>
-        /// <param name="deckId">ID b? th?</param>
-        /// <param name="cardId">ID th?</param>
-        /// <returns>True n?u th�nh c�ng</returns>
+        /// <param name="deckId">ID bộ thẻ</param>
+        /// <param name="cardId">ID thẻ</param>
+        /// <returns>True nếu thành công</returns>
         public bool ToggleBookmark(int deckId, int cardId)
         {
             var decks = _repository.GetAllDecks();
@@ -251,7 +251,7 @@ namespace ASM.Bussiness.Services
                 return false;
             }
 
-            // ??o tr?ng th�i bookmark
+            // Đảo trạng thái bookmark
             card.IsBookmarked = !card.IsBookmarked;
             return _repository.SaveAllDecks(decks);
         }

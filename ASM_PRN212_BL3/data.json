@@ -1,99 +1,99 @@
 [
   {
     "Id": 1,
-    "Name": "Tieng Anh Co Ban",
+    "Name": "Tiếng Anh cơ bản",
     "CreatedDate": "2024-01-15T10:00:00",
     "Flashcards": [
       {
         "Id": 1,
         "Term": "Hello",
-        "Definition": "Xin chao",
+        "Definition": "Xin chào",
         "IsBookmarked": false
       },
       {
         "Id": 2,
         "Term": "Goodbye",
-        "Definition": "Tam biet",
+        "Definition": "Tạm biệt",
         "IsBookmarked": true
       },
       {
         "Id": 3,
         "Term": "Thank you",
-        "Definition": "Cam on",
+        "Definition": "Cảm ơn",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Sorry",
-        "Definition": "Xin loi",
+        "Definition": "Xin lỗi",
         "IsBookmarked": false
       },
       {
         "Id": 5,
         "Term": "Please",
-        "Definition": "Lam on",
+        "Definition": "Làm ơn",
         "IsBookmarked": false
       }
     ]
   },
   {
     "Id": 2,
-    "Name": "Tu vung TOEIC",
+    "Name": "Từ vựng TOEIC",
     "CreatedDate": "2024-01-16T14:30:00",
     "Flashcards": [
       {
         "Id": 1,
         "Term": "Agreement",
-        "Definition": "Thoa thuan, hop dong",
+        "Definition": "Thỏa thuận, hợp đồng",
         "IsBookmarked": true
       },
       {
         "Id": 2,
         "Term": "Appointment",
-        "Definition": "Cuoc hen",
+        "Definition": "Cuộc hẹn",
         "IsBookmarked": false
       },
       {
         "Id": 3,
         "Term": "Budget",
-        "Definition": "Ngan sach",
+        "Definition": "Ngân sách",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Conference",
-        "Definition": "Hoi nghi",
+        "Definition": "Hội nghị",
         "IsBookmarked": true
       }
     ]
   },
   {
     "Id": 3,
-    "Name": "Tieng Nhat N5",
+    "Name": "Tiếng Nhật N5",
     "CreatedDate": "2024-01-17T09:00:00",
     "Flashcards": [
       {
         "Id": 1,
         "Term": "Arigatou",
-        "Definition": "Cam on",
+        "Definition": "Cảm ơn",
         "IsBookmarked": true
       },
       {
         "Id": 2,
         "Term": "Sumimasen",
-        "Definition": "Xin loi / Xin phep",
+        "Definition": "Xin lỗi / Xin phép",
         "IsBookmarked": false
       },
       {
         "Id": 3,
         "Term": "Ohayou",
-        "Definition": "Chao buoi sang",
+        "Definition": "Chào buổi sáng",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Konnichiwa",
-        "Definition": "Xin chao (ban ngay)",
+        "Definition": "Xin chào (ban ngày)",
         "IsBookmarked": false
       }
     ]

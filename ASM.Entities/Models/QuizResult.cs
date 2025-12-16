@@ -1,52 +1,52 @@
-namespace ASM.Entities.Models
+﻿namespace ASM.Entities.Models
 {
     /// <summary>
-    /// Model l?u tr? k?t qu? h?c t?p c?a ng??i d�ng
+    /// Model lưu trữ kết quả học tập của người dùng
     /// </summary>
     public class QuizResult
     {
         /// <summary>
-        /// ID duy nh?t c?a k?t qu?
+        /// ID duy nhất của kết quả
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// ID ng??i d�ng
+        /// ID người dùng
         /// </summary>
         public int UserId { get; set; }
 
         /// <summary>
-        /// ID b? th? ?� h?c
+        /// ID bộ thẻ đã học
         /// </summary>
         public int DeckId { get; set; }
 
         /// <summary>
-        /// T�n b? th? (?? hi?n th?)
+        /// Tên bộ thẻ (để hiển thị)
         /// </summary>
         public string DeckName { get; set; } = string.Empty;
 
         /// <summary>
-        /// T?ng s? th? trong b�i quiz
+        /// Tổng số thẻ trong bài quiz
         /// </summary>
         public int TotalCards { get; set; }
 
         /// <summary>
-        /// S? c�u tr? l?i ?�ng
+        /// Số câu trả lời đúng
         /// </summary>
         public int CorrectAnswers { get; set; }
 
         /// <summary>
-        /// ?i?m ph?n tr?m
+        /// Điểm phần trăm
         /// </summary>
         public double ScorePercent => TotalCards > 0 ? (double)CorrectAnswers / TotalCards * 100 : 0;
 
         /// <summary>
-        /// Th?i gian ho�n th�nh (gi�y)
+        /// Thời gian hoàn thành (giây)
         /// </summary>
         public int TimeSpentSeconds { get; set; }
 
         /// <summary>
-        /// Ng�y th?c hi?n quiz
+        /// Ngày thực hiện quiz
         /// </summary>
         public DateTime CompletedDate { get; set; } = DateTime.Now;
     }

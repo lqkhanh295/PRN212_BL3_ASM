@@ -1,32 +1,32 @@
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace ASM_PRN212_BL3.ViewModels
 {
     /// <summary>
-    /// Implementation c?a ICommand ?? s? d?ng trong MVVM
-    /// Cho ph�p binding c�c h�nh ??ng t? View ??n ViewModel
+    /// Implementation của ICommand để sử dụng trong MVVM
+    /// Cho phép binding các hành động từ View đến ViewModel
     /// </summary>
     public class RelayCommand : ICommand
     {
-        // Delegate ch?a h�nh ??ng c?n th?c thi
+        // Delegate chứa hành động cần thực thi
         private readonly Action<object?> _execute;
 
-        // Delegate ki?m tra xem command c� th? th?c thi kh�ng
+        // Delegate kiểm tra xem command có thể thực thi không
         private readonly Predicate<object?>? _canExecute;
 
         /// <summary>
-        /// Constructor v?i h�nh ??ng th?c thi
+        /// Constructor với hành động thực thi
         /// </summary>
-        /// <param name="execute">H�nh ??ng c?n th?c thi khi command ???c g?i</param>
+        /// <param name="execute">Hành động cần thực thi khi command được gọi</param>
         public RelayCommand(Action<object?> execute) : this(execute, null)
         {
         }
 
         /// <summary>
-        /// Constructor v?i h�nh ??ng th?c thi v� ?i?u ki?n
+        /// Constructor với hành động thực thi và điều kiện
         /// </summary>
-        /// <param name="execute">H�nh ??ng c?n th?c thi</param>
-        /// <param name="canExecute">?i?u ki?n ?? command c� th? th?c thi</param>
+        /// <param name="execute">Hành động cần thực thi</param>
+        /// <param name="canExecute">Điều kiện để command có thể thực thi</param>
         public RelayCommand(Action<object?> execute, Predicate<object?>? canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
@@ -34,8 +34,8 @@ namespace ASM_PRN212_BL3.ViewModels
         }
 
         /// <summary>
-        /// Event ???c g?i khi ?i?u ki?n CanExecute c� th? ?� thay ??i
-        /// WPF t? ??ng l?ng nghe v� c?p nh?t tr?ng th�i enabled/disabled c?a control
+        /// Event được gọi khi điều kiện CanExecute có thể đã thay đổi
+        /// WPF tự động lắng nghe và cập nhật trạng thái enabled/disabled của control
         /// </summary>
         public event EventHandler? CanExecuteChanged
         {
@@ -44,26 +44,26 @@ namespace ASM_PRN212_BL3.ViewModels
         }
 
         /// <summary>
-        /// Ki?m tra xem command c� th? th?c thi kh�ng
+        /// Kiểm tra xem command có thể thực thi không
         /// </summary>
-        /// <param name="parameter">Tham s? truy?n v�o (c� th? null)</param>
-        /// <returns>True n?u c� th? th?c thi</returns>
+        /// <param name="parameter">Tham số truyền vào (có thể null)</param>
+        /// <returns>True nếu có thể thực thi</returns>
         public bool CanExecute(object? parameter)
         {
             return _canExecute == null || _canExecute(parameter);
         }
 
         /// <summary>
-        /// Th?c thi command
+        /// Thực thi command
         /// </summary>
-        /// <param name="parameter">Tham s? truy?n v�o</param>
+        /// <param name="parameter">Tham số truyền vào</param>
         public void Execute(object? parameter)
         {
             _execute(parameter);
         }
 
         /// <summary>
-        /// G?i ?? th�ng b�o CanExecute c� th? ?� thay ??i
+        /// Gọi để thông báo CanExecute có thể đã thay đổi
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
@@ -72,9 +72,9 @@ namespace ASM_PRN212_BL3.ViewModels
     }
 
     /// <summary>
-    /// RelayCommand generic cho c�c tr??ng h?p c?n type-safe parameter
+    /// RelayCommand generic cho các trường hợp cần type-safe parameter
     /// </summary>
-    /// <typeparam name="T">Ki?u c?a parameter</typeparam>
+    /// <typeparam name="T">Kiểu của parameter</typeparam>
     public class RelayCommand<T> : ICommand
     {
         private readonly Action<T?> _execute;

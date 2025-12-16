@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ASM_PRN212_BL3.ViewModels"
         mc:Ignorable="d"
-        Title="Quan Ly Flashcard - Admin Mode" 
+        Title="Quản Lý Flashcard - Chế Độ Quản Trị" 
         Height="650" Width="1050"
         WindowStartupLocation="CenterScreen"
         Background="#F0F0F0">
@@ -16,7 +16,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <!-- Style cho Button chinh -->
+        <!-- Style cho Button chính -->
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#007ACC"/>
             <Setter Property="Foreground" Value="White"/>
@@ -27,7 +27,7 @@
             <Setter Property="FontSize" Value="13"/>
         </Style>
 
-        <!-- Style cho Button nguy hiem (xoa) -->
+        <!-- Style cho Button nguy hiểm (xóa) -->
         <Style x:Key="DangerButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#DC3545"/>
             <Setter Property="Foreground" Value="White"/>
@@ -38,7 +38,7 @@
             <Setter Property="FontSize" Value="13"/>
         </Style>
 
-        <!-- Style cho Button thanh cong -->
+        <!-- Style cho Button thành công -->
         <Style x:Key="SuccessButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#28A745"/>
             <Setter Property="Foreground" Value="White"/>
@@ -72,15 +72,15 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="🎴 Flashcard Quiz - " 
                                    FontSize="22" FontWeight="Bold" Foreground="#333"/>
-                        <TextBlock Text="Admin Panel" 
+                        <TextBlock Text="Bảng Điều Khiển Quản Trị" 
                                    FontSize="22" FontWeight="Bold" Foreground="#007ACC"/>
                     </StackPanel>
-                    <TextBlock Text="Quan ly bo the va flashcard" 
+                    <TextBlock Text="Quản lý bộ thẻ và flashcard" 
                                FontSize="12" Foreground="#666"/>
                 </StackPanel>
 
                 <Button x:Name="btnLogout" Grid.Column="1" 
-                        Content="🚪 Dang Xuat" 
+                        Content="🚪 Đăng Xuất" 
                         Style="{StaticResource DangerButtonStyle}"
                         Click="BtnLogout_Click"/>
             </Grid>
@@ -93,7 +93,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- PANEL TRAI: QUAN LY DECK -->
+            <!-- PANEL TRÁI: QUẢN LÝ DECK -->
             <Border Grid.Column="0" Background="White" 
                     CornerRadius="8" Margin="0,0,10,0" Padding="15">
                 <Border.Effect>
@@ -107,26 +107,26 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Tieu de -->
-                    <TextBlock Grid.Row="0" Text="📚 Danh sach bo the" 
+                    <!-- Tiêu đề -->
+                    <TextBlock Grid.Row="0" Text="📚 Danh Sách Bộ Thẻ" 
                                FontSize="16" FontWeight="SemiBold" 
                                Margin="0,0,0,15" Foreground="#333"/>
 
-                    <!-- Form tao deck moi -->
+                    <!-- Form tạo deck mới -->
                     <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="5" Padding="10" Margin="0,0,0,15">
                         <StackPanel>
-                            <TextBlock Text="Tao bo the moi:" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                            <TextBlock Text="Tạo bộ thẻ mới:" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,8"/>
                             <TextBox Text="{Binding NewDeckName, UpdateSourceTrigger=PropertyChanged}" 
                                      Padding="10" FontSize="13" 
                                      BorderBrush="#DDD" BorderThickness="1"/>
-                            <Button Content="➕ Tao bo the" 
+                            <Button Content="➕ Tạo Bộ Thẻ" 
                                     Command="{Binding CreateDeckCommand}"
                                     Style="{StaticResource SuccessButtonStyle}"
                                     HorizontalAlignment="Left" Margin="0,8,0,0"/>
                         </StackPanel>
                     </Border>
 
-                    <!-- Danh sach Deck -->
+                    <!-- Danh sách Deck -->
                     <ListBox Grid.Row="2" 
                              ItemsSource="{Binding Decks}" 
                              SelectedItem="{Binding SelectedDeck}"
@@ -141,7 +141,7 @@
                                             <TextBlock Text="📝 " FontSize="11"/>
                                             <TextBlock FontSize="11" Foreground="#666">
                                                 <Run Text="{Binding CardCount, Mode=OneWay}"/>
-                                                <Run Text=" the"/>
+                                                <Run Text=" thẻ"/>
                                             </TextBlock>
                                         </StackPanel>
                                     </StackPanel>
@@ -150,15 +150,15 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <!-- Button xoa deck -->
-                    <Button Grid.Row="3" Content="🗑️ Xoa bo the da chon" 
+                    <!-- Button xóa deck -->
+                    <Button Grid.Row="3" Content="🗑️ Xóa Bộ Thẻ Đã Chọn" 
                             Command="{Binding DeleteDeckCommand}"
                             Style="{StaticResource DangerButtonStyle}"
                             HorizontalAlignment="Stretch" Margin="0,15,0,0"/>
                 </Grid>
             </Border>
 
-            <!-- PANEL PHAI: QUAN LY FLASHCARD -->
+            <!-- PANEL PHẢI: QUẢN LÝ FLASHCARD -->
             <Border Grid.Column="1" Background="White" 
                     CornerRadius="8" Margin="10,0,0,0" Padding="15">
                 <Border.Effect>
@@ -172,14 +172,14 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Tieu de -->
+                    <!-- Tiêu đề -->
                     <TextBlock Grid.Row="0" FontSize="16" FontWeight="SemiBold" 
                                Margin="0,0,0,15" Foreground="#333">
                         <Run Text="🃏 Flashcards - "/>
-                        <Run Text="{Binding SelectedDeck.Name, FallbackValue='(Chon bo the)'}"/>
+                        <Run Text="{Binding SelectedDeck.Name, FallbackValue='(Chọn bộ thẻ)'}"/>
                     </TextBlock>
 
-                    <!-- Form them flashcard moi -->
+                    <!-- Form thêm flashcard mới -->
                     <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="5" Padding="15" Margin="0,0,0,15">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -193,30 +193,30 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.ColumnSpan="3" 
-                                       Text="Them the moi:" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                       Text="Thêm thẻ mới:" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,10"/>
 
                             <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
-                                <TextBlock Text="Thuat ngu (Term):" FontSize="11" Margin="0,0,0,5" Foreground="#666"/>
+                                <TextBlock Text="Thuật ngữ (Term):" FontSize="11" Margin="0,0,0,5" Foreground="#666"/>
                                 <TextBox Text="{Binding NewTerm, UpdateSourceTrigger=PropertyChanged}" 
                                          Padding="10" FontSize="13"
                                          BorderBrush="#DDD" BorderThickness="1"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,0,10,0">
-                                <TextBlock Text="Dinh nghia (Definition):" FontSize="11" Margin="0,0,0,5" Foreground="#666"/>
+                                <TextBlock Text="Định nghĩa (Definition):" FontSize="11" Margin="0,0,0,5" Foreground="#666"/>
                                 <TextBox Text="{Binding NewDefinition, UpdateSourceTrigger=PropertyChanged}" 
                                          Padding="10" FontSize="13"
                                          BorderBrush="#DDD" BorderThickness="1"/>
                             </StackPanel>
 
-                            <Button Grid.Row="1" Grid.Column="2" Content="➕ Them" 
+                            <Button Grid.Row="1" Grid.Column="2" Content="➕ Thêm" 
                                     Command="{Binding AddFlashcardCommand}"
                                     Style="{StaticResource SuccessButtonStyle}"
                                     VerticalAlignment="Bottom"/>
                         </Grid>
                     </Border>
 
-                    <!-- Danh sach Flashcard -->
+                    <!-- Danh sách Flashcard -->
                     <ListView Grid.Row="2" 
                               ItemsSource="{Binding Flashcards}" 
                               SelectedItem="{Binding SelectedFlashcard}"
@@ -225,9 +225,9 @@
                             <GridView>
                                 <GridViewColumn Header="ID" Width="50" 
                                                 DisplayMemberBinding="{Binding Id}"/>
-                                <GridViewColumn Header="Thuat ngu" Width="180" 
+                                <GridViewColumn Header="Thuật Ngữ" Width="180" 
                                                 DisplayMemberBinding="{Binding Term}"/>
-                                <GridViewColumn Header="Dinh nghia" Width="250" 
+                                <GridViewColumn Header="Định Nghĩa" Width="250" 
                                                 DisplayMemberBinding="{Binding Definition}"/>
                                 <GridViewColumn Header="⭐" Width="50">
                                     <GridViewColumn.CellTemplate>
@@ -240,16 +240,16 @@
                         </ListView.View>
                     </ListView>
 
-                    <!-- Buttons quan ly flashcard -->
+                    <!-- Buttons quản lý flashcard -->
                     <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,15,0,0">
-                        <Button Content="🗑️ Xoa the" 
+                        <Button Content="🗑️ Xóa Thẻ" 
                                 Command="{Binding DeleteFlashcardCommand}"
                                 Style="{StaticResource DangerButtonStyle}"/>
-                        <Button Content="⭐ Bookmark" 
+                        <Button Content="⭐ Đánh Dấu" 
                                 Command="{Binding ToggleBookmarkCommand}"
                                 CommandParameter="{Binding SelectedFlashcard}"
                                 Style="{StaticResource PrimaryButtonStyle}"/>
-                        <Button Content="🔄 Refresh" 
+                        <Button Content="🔄 Làm Mới" 
                                 Command="{Binding LoadDecksCommand}"
                                 Style="{StaticResource PrimaryButtonStyle}"/>
                     </StackPanel>
@@ -264,10 +264,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <TextBlock Grid.Column="0" Text="{Binding StatusMessage}" 
                            Foreground="White" FontSize="12" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Text="Admin Mode" 
+                <TextBlock Grid.Column="1" Text="Chế Độ Quản Trị" 
                            Foreground="#28A745" FontSize="12" FontWeight="SemiBold"/>
             </Grid>
         </Border>

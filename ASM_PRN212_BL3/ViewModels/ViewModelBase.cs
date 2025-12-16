@@ -1,47 +1,47 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace ASM_PRN212_BL3.ViewModels
 {
     /// <summary>
-    /// L?p c? s? cho t?t c? ViewModel
-    /// Cung c?p c? ch? th�ng b�o thay ??i thu?c t�nh (INotifyPropertyChanged)
-    /// ?�y l� n?n t?ng c?a MVVM pattern
+    /// Lớp cơ sở cho tất cả ViewModel
+    /// Cung cấp cơ chế thông báo thay đổi thuộc tính (INotifyPropertyChanged)
+    /// Đây là nền tảng của MVVM pattern
     /// </summary>
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         /// <summary>
-        /// Event ???c k�ch ho?t khi m?t thu?c t�nh thay ??i gi� tr?
-        /// WPF s? l?ng nghe event n�y ?? t? ??ng c?p nh?t giao di?n
+        /// Event được kích hoạt khi một thuộc tính thay đổi giá trị
+        /// WPF sẽ lắng nghe event này để tự động cập nhật giao diện
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        /// Ph??ng th?c g?i ?? th�ng b�o thu?c t�nh ?� thay ??i
+        /// Phương thức gọi để thông báo thuộc tính đã thay đổi
         /// </summary>
-        /// <param name="propertyName">T�n thu?c t�nh (t? ??ng l?y t? caller)</param>
+        /// <param name="propertyName">Tên thuộc tính (tự động lấy từ caller)</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
-        /// Ph??ng th?c helper ?? set gi� tr? v� t? ??ng raise event
+        /// Phương thức helper để set giá trị và tự động raise event
         /// </summary>
-        /// <typeparam name="T">Ki?u d? li?u c?a thu?c t�nh</typeparam>
-        /// <param name="field">Bi?n backing field</param>
-        /// <param name="value">Gi� tr? m?i</param>
-        /// <param name="propertyName">T�n thu?c t�nh</param>
-        /// <returns>True n?u gi� tr? thay ??i</returns>
+        /// <typeparam name="T">Kiểu dữ liệu của thuộc tính</typeparam>
+        /// <param name="field">Biến backing field</param>
+        /// <param name="value">Giá trị mới</param>
+        /// <param name="propertyName">Tên thuộc tính</param>
+        /// <returns>True nếu giá trị thay đổi</returns>
         protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            // N?u gi� tr? kh�ng thay ??i, kh�ng l�m g�
+            // Nếu giá trị không thay đổi, không làm gì
             if (EqualityComparer<T>.Default.Equals(field, value))
             {
                 return false;
             }
 
-            // C?p nh?t gi� tr? v� th�ng b�o
+            // Cập nhật giá trị và thông báo
             field = value;
             OnPropertyChanged(propertyName);
             return true;

@@ -1,10 +1,10 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using ASM.Entities.Models;
 
 namespace ASM.Data.Repositories
 {
     /// <summary>
-    /// Repository quan ly nguoi dung - doc/ghi tu file users.json
+    /// Repository quản lý người dùng - đọc/ghi từ file users.json
     /// </summary>
     public class UserRepository
     {
@@ -22,7 +22,7 @@ namespace ASM.Data.Repositories
         }
 
         /// <summary>
-        /// Lay tat ca nguoi dung
+        /// Lấy tất cả người dùng
         /// </summary>
         public List<User> GetAllUsers()
         {
@@ -34,6 +34,7 @@ namespace ASM.Data.Repositories
                 }
 
                 string jsonContent = File.ReadAllText(_filePath);
+
                 if (string.IsNullOrWhiteSpace(jsonContent))
                 {
                     return new List<User>();
@@ -44,13 +45,13 @@ namespace ASM.Data.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Loi khi doc file users.json: {ex.Message}");
+                Console.WriteLine($"Lỗi khi đọc file users.json: {ex.Message}");
                 return new List<User>();
             }
         }
 
         /// <summary>
-        /// Luu tat ca nguoi dung xuong file
+        /// Lưu tất cả người dùng xuống file
         /// </summary>
         public bool SaveAllUsers(List<User> users)
         {
@@ -62,23 +63,23 @@ namespace ASM.Data.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Loi khi ghi file users.json: {ex.Message}");
+                Console.WriteLine($"Lỗi khi ghi file users.json: {ex.Message}");
                 return false;
             }
         }
 
         /// <summary>
-        /// Tim nguoi dung theo username
+        /// Tìm người dùng theo username
         /// </summary>
         public User? GetUserByUsername(string username)
         {
             var users = GetAllUsers();
-            return users.FirstOrDefault(u => 
+            return users.FirstOrDefault(u =>
                 u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
-        /// Xac thuc nguoi dung
+        /// Xác thực người dùng
         /// </summary>
         public User? Authenticate(string username, string password)
         {

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using ASM.Bussiness.Services;
@@ -7,17 +7,17 @@ using ASM.Entities.Models;
 namespace ASM_PRN212_BL3.ViewModels
 {
     /// <summary>
-    /// ViewModel ch�nh c?a ?ng d?ng
-    /// Qu?n l� danh s�ch Deck v� c�c thao t�c li�n quan
+    /// ViewModel chính của ứng dụng
+    /// Quản lý danh sách Deck và các thao tác liên quan
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        // Service t? t?ng BLL
+        // Service từ tầng BLL
         private readonly DeckService _deckService;
 
-        #region Properties (Thu?c t�nh binding v?i View)
+        #region Properties (Thuộc tính binding với View)
 
-        // Danh s�ch c�c b? th? - ObservableCollection t? ??ng th�ng b�o khi th�m/x�a item
+        // Danh sách các bộ thẻ - ObservableCollection tự động thông báo khi thêm/xóa item
         private ObservableCollection<Deck> _decks = new();
         public ObservableCollection<Deck> Decks
         {
@@ -25,7 +25,7 @@ namespace ASM_PRN212_BL3.ViewModels
             set => SetProperty(ref _decks, value);
         }
 
-        // B? th? ?ang ???c ch?n
+        // Bộ thẻ đang được chọn
         private Deck? _selectedDeck;
         public Deck? SelectedDeck
         {
@@ -34,13 +34,13 @@ namespace ASM_PRN212_BL3.ViewModels
             {
                 if (SetProperty(ref _selectedDeck, value))
                 {
-                    // Khi ch?n deck kh�c, load danh s�ch th? c?a deck ?�
+                    // Khi chọn deck khác, load danh sách thẻ của deck đó
                     LoadFlashcards();
                 }
             }
         }
 
-        // Danh s�ch th? c?a deck ?ang ch?n
+        // Danh sách thẻ của deck đang chọn
         private ObservableCollection<Flashcard> _flashcards = new();
         public ObservableCollection<Flashcard> Flashcards
         {
@@ -48,7 +48,7 @@ namespace ASM_PRN212_BL3.ViewModels
             set => SetProperty(ref _flashcards, value);
         }
 
-        // Th? ?ang ???c ch?n
+        // Thẻ đang được chọn
         private Flashcard? _selectedFlashcard;
         public Flashcard? SelectedFlashcard
         {
@@ -56,7 +56,7 @@ namespace ASM_PRN212_BL3.ViewModels
             set => SetProperty(ref _selectedFlashcard, value);
         }
 
-        // T�n deck m?i (?? t?o deck)
+        // Tên deck mới (để tạo deck)
         private string _newDeckName = string.Empty;
         public string NewDeckName
         {
@@ -64,7 +64,7 @@ namespace ASM_PRN212_BL3.ViewModels
             set => SetProperty(ref _newDeckName, value);
         }
 
-        // Thu?t ng? m?i (?? t?o flashcard)
+        // Thuật ngữ mới (để tạo flashcard)
         private string _newTerm = string.Empty;
         public string NewTerm
         {
@@ -72,7 +72,7 @@ namespace ASM_PRN212_BL3.ViewModels
             set => SetProperty(ref _newTerm, value);
         }
 
-        // ??nh ngh?a m?i (?? t?o flashcard)
+        // Định nghĩa mới (để tạo flashcard)
         private string _newDefinition = string.Empty;
         public string NewDefinition
         {
@@ -80,7 +80,7 @@ namespace ASM_PRN212_BL3.ViewModels
             set => SetProperty(ref _newDefinition, value);
         }
 
-        // Th�ng b�o tr?ng th�i cho ng??i d�ng
+        // Thông báo trạng thái cho người dùng
         private string _statusMessage = string.Empty;
         public string StatusMessage
         {
@@ -90,37 +90,37 @@ namespace ASM_PRN212_BL3.ViewModels
 
         #endregion
 
-        #region Commands (C�c l?nh binding v?i View)
+        #region Commands (Các lệnh binding với View)
 
-        // Command ?? load danh s�ch deck
+        // Command để load danh sách deck
         public ICommand LoadDecksCommand { get; }
 
-        // Command ?? t?o deck m?i
+        // Command để tạo deck mới
         public ICommand CreateDeckCommand { get; }
 
-        // Command ?? x�a deck ?ang ch?n
+        // Command để xóa deck đang chọn
         public ICommand DeleteDeckCommand { get; }
 
-        // Command ?? th�m th? m?i v�o deck
+        // Command để thêm thẻ mới vào deck
         public ICommand AddFlashcardCommand { get; }
 
-        // Command ?? x�a th? ?ang ch?n
+        // Command để xóa thẻ đang chọn
         public ICommand DeleteFlashcardCommand { get; }
 
-        // Command ?? toggle bookmark
+        // Command để toggle bookmark
         public ICommand ToggleBookmarkCommand { get; }
 
         #endregion
 
         /// <summary>
-        /// Constructor - kh?i t?o ViewModel
+        /// Constructor - khởi tạo ViewModel
         /// </summary>
         public MainViewModel()
         {
-            // Kh?i t?o service t? BLL
+            // Khởi tạo service từ BLL
             _deckService = new DeckService();
 
-            // Kh?i t?o c�c Command
+            // Khởi tạo các Command
             LoadDecksCommand = new RelayCommand(_ => LoadDecks());
             CreateDeckCommand = new RelayCommand(_ => CreateDeck(), _ => CanCreateDeck());
             DeleteDeckCommand = new RelayCommand(_ => DeleteDeck(), _ => SelectedDeck != null);
@@ -128,14 +128,14 @@ namespace ASM_PRN212_BL3.ViewModels
             DeleteFlashcardCommand = new RelayCommand(_ => DeleteFlashcard(), _ => SelectedFlashcard != null);
             ToggleBookmarkCommand = new RelayCommand<Flashcard>(ToggleBookmark);
 
-            // T? ??ng load d? li?u khi kh?i t?o
+            // Tự động load dữ liệu khi khởi tạo
             LoadDecks();
         }
 
-        #region Command Methods (C�c ph??ng th?c x? l�)
+        #region Command Methods (Các phương thức xử lý)
 
         /// <summary>
-        /// Load t?t c? deck t? BLL
+        /// Load tất cả deck từ BLL
         /// </summary>
         private void LoadDecks()
         {
@@ -143,23 +143,23 @@ namespace ASM_PRN212_BL3.ViewModels
             {
                 var decks = _deckService.GetAllDecks();
                 Decks = new ObservableCollection<Deck>(decks);
-                StatusMessage = $"?� t?i {decks.Count} b? th?";
+                StatusMessage = $"Đã tải {decks.Count} bộ thẻ";
             }
             catch (Exception ex)
             {
-                StatusMessage = $"L?i: {ex.Message}";
+                StatusMessage = $"Lỗi: {ex.Message}";
             }
         }
 
         /// <summary>
-        /// Load danh s�ch flashcard c?a deck ?ang ch?n
+        /// Load danh sách flashcard của deck đang chọn
         /// </summary>
         private void LoadFlashcards()
         {
             if (SelectedDeck != null)
             {
                 Flashcards = new ObservableCollection<Flashcard>(SelectedDeck.Flashcards);
-                StatusMessage = $"B? th? '{SelectedDeck.Name}' c� {SelectedDeck.CardCount} th?";
+                StatusMessage = $"Bộ thẻ '{SelectedDeck.Name}' có {SelectedDeck.CardCount} thẻ";
             }
             else
             {
@@ -168,7 +168,7 @@ namespace ASM_PRN212_BL3.ViewModels
         }
 
         /// <summary>
-        /// Ki?m tra c� th? t?o deck m?i kh�ng
+        /// Kiểm tra có thể tạo deck mới không
         /// </summary>
         private bool CanCreateDeck()
         {
@@ -176,7 +176,7 @@ namespace ASM_PRN212_BL3.ViewModels
         }
 
         /// <summary>
-        /// T?o deck m?i
+        /// Tạo deck mới
         /// </summary>
         private void CreateDeck()
         {
@@ -185,25 +185,25 @@ namespace ASM_PRN212_BL3.ViewModels
             {
                 Decks.Add(newDeck);
                 NewDeckName = string.Empty; // Clear input
-                StatusMessage = $"?� t?o b? th? '{newDeck.Name}'";
+                StatusMessage = $"Đã tạo bộ thẻ '{newDeck.Name}'";
             }
             else
             {
-                StatusMessage = "Kh�ng th? t?o b? th?";
+                StatusMessage = "Không thể tạo bộ thẻ";
             }
         }
 
         /// <summary>
-        /// X�a deck ?ang ch?n
+        /// Xóa deck đang chọn
         /// </summary>
         private void DeleteDeck()
         {
             if (SelectedDeck == null) return;
 
-            // Hi?n h?p tho?i x�c nh?n
+            // Hiện hộp thoại xác nhận
             var result = MessageBox.Show(
-                $"B?n c� ch?c mu?n x�a b? th? '{SelectedDeck.Name}'?",
-                "X�c nh?n x�a",
+                $"Bạn có chắc muốn xóa bộ thẻ '{SelectedDeck.Name}'?",
+                "Xác nhận xóa",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
@@ -214,13 +214,13 @@ namespace ASM_PRN212_BL3.ViewModels
                     var deletedName = SelectedDeck.Name;
                     Decks.Remove(SelectedDeck);
                     SelectedDeck = null;
-                    StatusMessage = $"?� x�a b? th? '{deletedName}'";
+                    StatusMessage = $"Đã xóa bộ thẻ '{deletedName}'";
                 }
             }
         }
 
         /// <summary>
-        /// Ki?m tra c� th? th�m flashcard kh�ng
+        /// Kiểm tra có thể thêm flashcard không
         /// </summary>
         private bool CanAddFlashcard()
         {
@@ -228,7 +228,7 @@ namespace ASM_PRN212_BL3.ViewModels
         }
 
         /// <summary>
-        /// Th�m flashcard m?i v�o deck ?ang ch?n
+        /// Thêm flashcard mới vào deck đang chọn
         /// </summary>
         private void AddFlashcard()
         {
@@ -244,21 +244,21 @@ namespace ASM_PRN212_BL3.ViewModels
             if (_deckService.AddCardToDeck(SelectedDeck.Id, newCard))
             {
                 Flashcards.Add(newCard);
-                
+
                 // Clear input
                 NewTerm = string.Empty;
                 NewDefinition = string.Empty;
-                
-                StatusMessage = $"?� th�m th? '{newCard.Term}'";
+
+                StatusMessage = $"Đã thêm thẻ '{newCard.Term}'";
             }
             else
             {
-                StatusMessage = "Kh�ng th? th�m th?";
+                StatusMessage = "Không thể thêm thẻ";
             }
         }
 
         /// <summary>
-        /// X�a flashcard ?ang ch?n
+        /// Xóa flashcard đang chọn
         /// </summary>
         private void DeleteFlashcard()
         {
@@ -269,12 +269,12 @@ namespace ASM_PRN212_BL3.ViewModels
                 var deletedTerm = SelectedFlashcard.Term;
                 Flashcards.Remove(SelectedFlashcard);
                 SelectedFlashcard = null;
-                StatusMessage = $"?� x�a th? '{deletedTerm}'";
+                StatusMessage = $"Đã xóa thẻ '{deletedTerm}'";
             }
         }
 
         /// <summary>
-        /// Toggle bookmark cho m?t th?
+        /// Toggle bookmark cho một thẻ
         /// </summary>
         private void ToggleBookmark(Flashcard? card)
         {
@@ -283,9 +283,9 @@ namespace ASM_PRN212_BL3.ViewModels
             if (_deckService.ToggleBookmark(SelectedDeck.Id, card.Id))
             {
                 card.IsBookmarked = !card.IsBookmarked;
-                StatusMessage = card.IsBookmarked 
-                    ? $"?� ?�nh d?u '{card.Term}'" 
-                    : $"?� b? ?�nh d?u '{card.Term}'";
+                StatusMessage = card.IsBookmarked
+                    ? $"Đã đánh dấu '{card.Term}'"
+                    : $"Đã bỏ đánh dấu '{card.Term}'";
             }
         }
 

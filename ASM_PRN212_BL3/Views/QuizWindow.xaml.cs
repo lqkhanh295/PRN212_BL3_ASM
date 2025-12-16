@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using ASM.Bussiness.Services;
@@ -7,19 +7,19 @@ using ASM.Entities.Models;
 namespace ASM_PRN212_BL3.Views
 {
     /// <summary>
-    /// Cua so hoc flashcard - che do Quiz cho sinh vien
+    /// Cửa sổ học flashcard - chế độ Quiz cho sinh viên
     /// </summary>
     public partial class QuizWindow : Window
     {
         private readonly DeckService _deckService;
         private readonly User? _currentUser;
 
-        // Danh sach the dang hoc
+        // Danh sách thẻ đang học
         private List<Flashcard> _currentCards = new();
         private int _currentIndex = 0;
         private bool _isShowingDefinition = false;
 
-        // Theo doi ket qua
+        // Theo dõi kết quả
         private int _correctCount = 0;
         private int _wrongCount = 0;
         private HashSet<int> _answeredCards = new();
@@ -35,26 +35,26 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Khoi tao giao dien
+        /// Khởi tạo giao diện
         /// </summary>
         private void InitializeUI()
         {
-            // Hien thi ten nguoi dung
+            // Hiển thị tên người dùng
             if (_currentUser != null)
             {
-                txtWelcome.Text = $"Xin chao, {_currentUser.DisplayName}!";
+                txtWelcome.Text = $"Xin chào, {_currentUser.DisplayName}!";
             }
             else
             {
-                txtWelcome.Text = "Xin chao, Khach!";
+                txtWelcome.Text = "Xin chào, Khách!";
             }
 
-            // An cac nut khi chua chon deck
+            // Ẩn các nút khi chưa chọn deck
             UpdateNavigationButtons();
         }
 
         /// <summary>
-        /// Load danh sach deck
+        /// Load danh sách deck
         /// </summary>
         private void LoadDecks()
         {
@@ -63,7 +63,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Xu ly khi chon deck
+        /// Xử lý khi chọn deck
         /// </summary>
         private void LstDecks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -74,18 +74,18 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Bat dau hoc mot bo the
+        /// Bắt đầu học một bộ thẻ
         /// </summary>
         private void StartLearning(Deck deck)
         {
             if (deck.Flashcards == null || deck.Flashcards.Count == 0)
             {
-                MessageBox.Show("Bo the nay chua co the nao!", "Thong bao", 
+                MessageBox.Show("Bộ thẻ này chưa có thẻ nào!", "Thông báo",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            // Reset trang thai
+            // Reset trạng thái
             _currentCards = new List<Flashcard>(deck.Flashcards);
             _currentIndex = 0;
             _isShowingDefinition = false;
@@ -93,37 +93,37 @@ namespace ASM_PRN212_BL3.Views
             _wrongCount = 0;
             _answeredCards.Clear();
 
-            // An panel ket qua
+            // Ẩn panel kết quả
             pnlResult.Visibility = Visibility.Collapsed;
             pnlAssessment.Visibility = Visibility.Collapsed;
 
-            // Hien thi the dau tien
+            // Hiển thị thẻ đầu tiên
             DisplayCurrentCard();
             UpdateNavigationButtons();
         }
 
         /// <summary>
-        /// Hien thi the hien tai
+        /// Hiển thị thẻ hiện tại
         /// </summary>
         private void DisplayCurrentCard()
         {
             if (_currentCards.Count == 0 || _currentIndex < 0 || _currentIndex >= _currentCards.Count)
             {
-                txtCardContent.Text = "Khong co the nao";
+                txtCardContent.Text = "Không có thẻ nào";
                 txtCardLabel.Text = "";
                 return;
             }
 
             var card = _currentCards[_currentIndex];
 
-            // Hien thi mat truoc hoac mat sau
+            // Hiển thị mặt trước hoặc mặt sau
             if (_isShowingDefinition)
             {
-                txtCardLabel.Text = "DINH NGHIA";
+                txtCardLabel.Text = "ĐỊNH NGHĨA";
                 txtCardContent.Text = card.Definition;
                 cardBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E8F5E9"));
-                
-                // Hien thi nut danh gia neu chua tra loi
+
+                // Hiển thị nút đánh giá nếu chưa trả lời
                 if (!_answeredCards.Contains(card.Id))
                 {
                     pnlAssessment.Visibility = Visibility.Visible;
@@ -131,31 +131,31 @@ namespace ASM_PRN212_BL3.Views
             }
             else
             {
-                txtCardLabel.Text = "THUAT NGU";
+                txtCardLabel.Text = "THUẬT NGỮ";
                 txtCardContent.Text = card.Term;
                 cardBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F8F9FA"));
                 pnlAssessment.Visibility = Visibility.Collapsed;
             }
 
-            // Hien thi bookmark
+            // Hiển thị bookmark
             txtBookmark.Visibility = card.IsBookmarked ? Visibility.Visible : Visibility.Collapsed;
 
-            // Cap nhat progress
+            // Cập nhật progress
             UpdateProgress();
         }
 
         /// <summary>
-        /// Cap nhat thanh tien trinh
+        /// Cập nhật thanh tiến trình
         /// </summary>
         private void UpdateProgress()
         {
-            txtProgress.Text = $"The: {_currentIndex + 1} / {_currentCards.Count}";
+            txtProgress.Text = $"Thẻ: {_currentIndex + 1} / {_currentCards.Count}";
             progressBar.Maximum = _currentCards.Count;
             progressBar.Value = _currentIndex + 1;
         }
 
         /// <summary>
-        /// Cap nhat trang thai cac nut dieu huong
+        /// Cập nhật trạng thái các nút điều hướng
         /// </summary>
         private void UpdateNavigationButtons()
         {
@@ -166,7 +166,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Lat the (click vao the)
+        /// Lật thẻ (click vào thẻ)
         /// </summary>
         private void CardBorder_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -177,7 +177,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// The truoc
+        /// Thẻ trước
         /// </summary>
         private void BtnPrevious_Click(object sender, RoutedEventArgs e)
         {
@@ -191,7 +191,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// The sau
+        /// Thẻ sau
         /// </summary>
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
@@ -204,13 +204,13 @@ namespace ASM_PRN212_BL3.Views
             }
             else
             {
-                // Da het the -> hien thi ket qua
+                // Đã hết thẻ -> hiển thị kết quả
                 ShowResults();
             }
         }
 
         /// <summary>
-        /// Tron ngau nhien cac the
+        /// Trộn ngẫu nhiên các thẻ
         /// </summary>
         private void BtnShuffle_Click(object sender, RoutedEventArgs e)
         {
@@ -224,18 +224,18 @@ namespace ASM_PRN212_BL3.Views
                 (_currentCards[i], _currentCards[j]) = (_currentCards[j], _currentCards[i]);
             }
 
-            // Reset ve the dau
+            // Reset về thẻ đầu
             _currentIndex = 0;
             _isShowingDefinition = false;
             DisplayCurrentCard();
             UpdateNavigationButtons();
 
-            MessageBox.Show("Da tron ngau nhien cac the!", "Thong bao", 
+            MessageBox.Show("Đã trộn ngẫu nhiên các thẻ!", "Thông báo",
                 MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
-        /// Danh dau la chua thuoc
+        /// Đánh dấu là chưa thuộc
         /// </summary>
         private void BtnWrong_Click(object sender, RoutedEventArgs e)
         {
@@ -243,7 +243,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Danh dau la da thuoc
+        /// Đánh dấu là đã thuộc
         /// </summary>
         private void BtnCorrect_Click(object sender, RoutedEventArgs e)
         {
@@ -251,15 +251,15 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Ghi nhan cau tra loi
+        /// Ghi nhận câu trả lời
         /// </summary>
         private void MarkAnswer(bool isCorrect)
         {
             if (_currentCards.Count == 0) return;
 
             var card = _currentCards[_currentIndex];
-            
-            // Chi ghi nhan moi the mot lan
+
+            // Chỉ ghi nhận mỗi thẻ một lần
             if (!_answeredCards.Contains(card.Id))
             {
                 _answeredCards.Add(card.Id);
@@ -269,10 +269,10 @@ namespace ASM_PRN212_BL3.Views
                     _wrongCount++;
             }
 
-            // An nut danh gia
+            // Ẩn nút đánh giá
             pnlAssessment.Visibility = Visibility.Collapsed;
 
-            // Tu dong chuyen the tiep theo
+            // Tự động chuyển thẻ tiếp theo
             if (_currentIndex < _currentCards.Count - 1)
             {
                 _currentIndex++;
@@ -282,30 +282,30 @@ namespace ASM_PRN212_BL3.Views
             }
             else
             {
-                // Het the -> hien thi ket qua
+                // Hết thẻ -> hiển thị kết quả
                 ShowResults();
             }
         }
 
         /// <summary>
-        /// Hien thi ket qua hoc tap
+        /// Hiển thị kết quả học tập
         /// </summary>
         private void ShowResults()
         {
             int total = _answeredCards.Count;
             if (total == 0)
             {
-                MessageBox.Show("Ban chua hoc the nao ca!", "Thong bao", 
+                MessageBox.Show("Bạn chưa học thẻ nào cả!", "Thông báo",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             double percent = (double)_correctCount / total * 100;
 
-            txtResult.Text = $"Ket qua: {_correctCount}/{total} ({percent:F1}%)";
-            txtResultDetail.Text = $"Da thuoc: {_correctCount} | Chua thuoc: {_wrongCount}";
+            txtResult.Text = $"Kết quả: {_correctCount}/{total} ({percent:F1}%)";
+            txtResultDetail.Text = $"Đã thuộc: {_correctCount} | Chưa thuộc: {_wrongCount}";
 
-            // Doi mau theo ket qua
+            // Đổi màu theo kết quả
             if (percent >= 80)
             {
                 pnlResult.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#28A745"));
@@ -324,7 +324,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Hoc lai tu dau
+        /// Học lại từ đầu
         /// </summary>
         private void BtnRestart_Click(object sender, RoutedEventArgs e)
         {
@@ -335,7 +335,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Dang xuat
+        /// Đăng xuất
         /// </summary>
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {

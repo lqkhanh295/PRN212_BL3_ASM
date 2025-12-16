@@ -1,16 +1,16 @@
-<Window x:Class="ASM_PRN212_BL3.Views.LoginWindow"
+﻿<Window x:Class="ASM_PRN212_BL3.Views.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Chon Phuong Thuc - Flashcard Quiz App" 
-        Height="520" Width="480"
+        Title="Chọn Phương Thức - Flashcard Quiz App" 
+        Height="676" Width="660"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Background="#F5F5F5">
 
-    <Grid>
+    <Grid Margin="0,0,10,-6">
         <Border Background="White" 
                 CornerRadius="15" 
                 Margin="25"
@@ -18,7 +18,7 @@
             <Border.Effect>
                 <DropShadowEffect BlurRadius="25" Opacity="0.15" ShadowDepth="5"/>
             </Border.Effect>
-            
+
             <StackPanel VerticalAlignment="Center">
                 <!-- Logo/Title -->
                 <Border Background="#007ACC" Width="70" Height="70" CornerRadius="35" 
@@ -27,19 +27,19 @@
                                Foreground="White" HorizontalAlignment="Center" 
                                VerticalAlignment="Center"/>
                 </Border>
-                
+
                 <TextBlock Text="Flashcard Quiz" 
                            FontSize="28" FontWeight="Bold" 
                            HorizontalAlignment="Center" 
                            Foreground="#333"/>
-                <TextBlock Text="Ung dung hoc tu vung" 
+                <TextBlock Text="Ứng dụng học từ vựng" 
                            FontSize="13" 
                            HorizontalAlignment="Center" 
                            Foreground="#666" 
                            Margin="0,5,0,30"/>
 
-                <!-- Huong dan -->
-                <TextBlock Text="Chon phuong thuc dang nhap:" 
+                <!-- Hướng dẫn -->
+                <TextBlock Text="Chọn phương thức đăng nhập:" 
                            FontSize="14" 
                            HorizontalAlignment="Center" 
                            Foreground="#555" 
@@ -63,8 +63,8 @@
                                        VerticalAlignment="Center"/>
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Quan Tri Vien (Admin)" FontWeight="SemiBold" FontSize="14"/>
-                            <TextBlock Text="Them, sua, xoa flashcard" FontSize="11" Opacity="0.85"/>
+                            <TextBlock Text="Quản Trị Viên (Admin)" FontWeight="SemiBold" FontSize="14"/>
+                            <TextBlock Text="Thêm, sửa, xóa flashcard" FontSize="11" Opacity="0.85"/>
                         </StackPanel>
                     </StackPanel>
                 </Button>
@@ -87,8 +87,8 @@
                                        VerticalAlignment="Center"/>
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Sinh Vien (Student)" FontWeight="SemiBold" FontSize="14"/>
-                            <TextBlock Text="Hoc va lam quiz" FontSize="11" Opacity="0.85"/>
+                            <TextBlock Text="Sinh Viên (Student)" FontWeight="SemiBold" FontSize="14"/>
+                            <TextBlock Text="Học và làm quiz" FontSize="11" Opacity="0.85"/>
                         </StackPanel>
                     </StackPanel>
                 </Button>
@@ -110,8 +110,8 @@
                                        VerticalAlignment="Center"/>
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Khach (Guest)" FontWeight="SemiBold" FontSize="14"/>
-                            <TextBlock Text="Xem va hoc thu" FontSize="11" Opacity="0.85"/>
+                            <TextBlock Text="Khách (Guest)" FontWeight="SemiBold" FontSize="14"/>
+                            <TextBlock Text="Xem và học thử" FontSize="11" Opacity="0.85"/>
                         </StackPanel>
                     </StackPanel>
                 </Button>

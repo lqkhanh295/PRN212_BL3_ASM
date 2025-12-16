@@ -1,11 +1,11 @@
-using System.Windows;
+﻿using System.Windows;
 using ASM.Entities.Models;
 
 namespace ASM_PRN212_BL3.Views
 {
     /// <summary>
-    /// Cua so chon phuong thuc dang nhap
-    /// Cho phep chon vai tro: Admin, Student, hoac Guest
+    /// Cửa sổ chọn phương thức đăng nhập
+    /// Cho phép chọn vai trò: Admin, Student, hoặc Guest
     /// </summary>
     public partial class LoginWindow : Window
     {
@@ -15,7 +15,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Dang nhap voi vai tro Admin
+        /// Đăng nhập với vai trò Admin
         /// </summary>
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)
         {
@@ -23,7 +23,7 @@ namespace ASM_PRN212_BL3.Views
             {
                 Id = 1,
                 Username = "admin",
-                DisplayName = "Quan Tri Vien",
+                DisplayName = "Quản Trị Viên",
                 Role = UserRole.Admin
             };
 
@@ -31,7 +31,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Dang nhap voi vai tro Student
+        /// Đăng nhập với vai trò Student
         /// </summary>
         private void BtnStudent_Click(object sender, RoutedEventArgs e)
         {
@@ -39,7 +39,7 @@ namespace ASM_PRN212_BL3.Views
             {
                 Id = 2,
                 Username = "student",
-                DisplayName = "Sinh Vien",
+                DisplayName = "Sinh Viên",
                 Role = UserRole.Student
             };
 
@@ -47,7 +47,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Vao che do Khach (Guest)
+        /// Vào chế độ Khách (Guest)
         /// </summary>
         private void BtnGuest_Click(object sender, RoutedEventArgs e)
         {
@@ -55,7 +55,7 @@ namespace ASM_PRN212_BL3.Views
             {
                 Id = 0,
                 Username = "guest",
-                DisplayName = "Khach",
+                DisplayName = "Khách",
                 Role = UserRole.Student
             };
 
@@ -63,7 +63,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Mo cua so Admin (MainWindow)
+        /// Mở cửa sổ Admin (MainWindow)
         /// </summary>
         private void OpenAdminWindow(User user)
         {
@@ -73,7 +73,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Mo cua so hoc (QuizWindow)
+        /// Mở cửa sổ học (QuizWindow)
         /// </summary>
         private void OpenQuizWindow(User user)
         {

@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="ASM.Bussiness/ASM.Bussiness.csproj" />
   <Project Path="ASM.Data/ASM.Data.csproj" />
+  <Project Path="ASM.Entities/ASM.Entities.csproj" />
   <Project Path="ASM_PRN212_BL3/ASM_PRN212_BL3.csproj" />
 </Solution>
