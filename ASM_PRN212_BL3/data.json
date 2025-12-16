@@ -1,12 +1,8 @@
 [
   {
     "Id": 1,
-<<<<<<< HEAD
     "Name": "Tiếng Anh cơ bản",
     "CreatedDate": "2024-01-15T10:00:00",
-=======
-    "Name": "Tieng Anh Co Ban",
->>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
     "Flashcards": [
       {
         "Id": 1,
@@ -45,17 +41,12 @@
         "IsBookmarked": false
       }
     ],
-    "CreatedDate": "2024-01-15T10:00:00",
     "CardCount": 6
   },
   {
     "Id": 2,
-<<<<<<< HEAD
     "Name": "Từ vựng TOEIC",
     "CreatedDate": "2024-01-16T14:30:00",
-=======
-    "Name": "Tu vung TOEIC",
->>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
     "Flashcards": [
       {
         "Id": 1,
@@ -82,17 +73,12 @@
         "IsBookmarked": true
       }
     ],
-    "CreatedDate": "2024-01-16T14:30:00",
     "CardCount": 4
   },
   {
     "Id": 3,
-<<<<<<< HEAD
     "Name": "Tiếng Nhật N5",
     "CreatedDate": "2024-01-17T09:00:00",
-=======
-    "Name": "Tieng Nhat N5",
->>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
     "Flashcards": [
       {
         "Id": 1,
@@ -119,7 +105,6 @@
         "IsBookmarked": false
       }
     ],
-    "CreatedDate": "2024-01-17T09:00:00",
     "CardCount": 4
   }
 ]
