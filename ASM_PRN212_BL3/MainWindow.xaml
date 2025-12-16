@@ -13,7 +13,6 @@
     <!-- DataContext is set in code-behind to avoid XAML type resolution issues -->
 
     <Window.Resources>
-        <!-- Style cho Button chính -->
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#4A90E2"/>
             <Setter Property="Foreground" Value="White"/>
@@ -41,7 +40,6 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Style cho Button nguy hiểm (xóa) -->
         <Style x:Key="DangerButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#E74C3C"/>
             <Setter Property="Foreground" Value="White"/>
@@ -69,7 +67,6 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Style cho Button thành công -->
         <Style x:Key="SuccessButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#2ECC71"/>
             <Setter Property="Foreground" Value="White"/>
@@ -140,14 +137,12 @@
             </Grid>
         </Border>
 
-        <!-- MAIN CONTENT -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="340"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- PANEL TRÁI: QUẢN LÝ DECK -->
             <Border Grid.Column="0" Background="White" 
                     CornerRadius="12" Margin="0,0,12,0" Padding="20">
                 <Border.Effect>
@@ -155,6 +150,7 @@
                 </Border.Effect>
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -207,8 +203,7 @@
                         </StackPanel>
                     </Border>
 
-                    <!-- Danh sách Deck -->
-                    <ListBox Grid.Row="2" 
+                    <ListBox Grid.Row="3" 
                              ItemsSource="{Binding Decks}" 
                              SelectedItem="{Binding SelectedDeck}"
                              BorderThickness="0" Background="Transparent"
@@ -259,15 +254,13 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <!-- Button xóa deck -->
-                    <Button Grid.Row="3" Content="🗑️ Xóa Bộ Thẻ Đã Chọn" 
+                    <Button Grid.Row="4" Content="🗑️ Xóa Bộ Thẻ Đã Chọn" 
                             Command="{Binding DeleteDeckCommand}"
                             Style="{StaticResource DangerButtonStyle}"
                             HorizontalAlignment="Stretch" Margin="0,20,0,0"/>
                 </Grid>
             </Border>
 
-            <!-- PANEL PHẢI: QUẢN LÝ FLASHCARD -->
             <Border Grid.Column="1" Background="White" 
                     CornerRadius="12" Margin="12,0,0,0" Padding="20">
                 <Border.Effect>
@@ -376,7 +369,6 @@
                         </Grid>
                     </Border>
 
-                    <!-- Danh sách Flashcard -->
                     <ListView Grid.Row="2" 
                               ItemsSource="{Binding Flashcards}" 
                               SelectedItem="{Binding SelectedFlashcard}"
@@ -421,8 +413,7 @@
                     </ListView>
 
                     <!-- Buttons quản lý flashcard -->
-                    <StackPanel Grid.Row="3" Orientation="Horizontal" 
-                                HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,15,0,0">
                         <Button Content="🗑️ Xóa Thẻ" 
                                 Command="{Binding DeleteFlashcardCommand}"
                                 Style="{StaticResource DangerButtonStyle}"/>
