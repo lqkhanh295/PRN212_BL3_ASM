@@ -6,37 +6,37 @@
       {
         "Id": 1,
         "Term": "Hello",
-        "Definition": "Xin chÃ o",
+        "Definition": "Xin chào",
         "IsBookmarked": true
       },
       {
         "Id": 2,
         "Term": "Goodbye",
-        "Definition": "Táº¡m biá»‡t",
+        "Definition": "Tạm biệt",
         "IsBookmarked": true
       },
       {
         "Id": 3,
         "Term": "Thank you",
-        "Definition": "Cáº£m Æ¡n",
+        "Definition": "Cảm ơn",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Sorry",
-        "Definition": "Xin lá»—i",
+        "Definition": "Xin lỗi",
         "IsBookmarked": false
       },
       {
         "Id": 5,
         "Term": "Please",
-        "Definition": "LÃ m Æ¡n",
+        "Definition": "Làm ơn",
         "IsBookmarked": false
       },
       {
         "Id": 6,
         "Term": "Consider",
-        "Definition": "Tin ráº±ng",
+        "Definition": "Tin rằng",
         "IsBookmarked": false
       }
     ],
@@ -50,25 +50,25 @@
       {
         "Id": 1,
         "Term": "Agreement",
-        "Definition": "Thá»a thuáº­n, há»£p Ä‘á»“ng",
+        "Definition": "Thỏa thuận",
         "IsBookmarked": true
       },
       {
         "Id": 2,
         "Term": "Appointment",
-        "Definition": "Cuá»™c háº¹n",
+        "Definition": "Cuộc hẹn",
         "IsBookmarked": false
       },
       {
         "Id": 3,
         "Term": "Budget",
-        "Definition": "NgÃ¢n sÃ¡ch",
+        "Definition": "Ngân sách",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Conference",
-        "Definition": "Há»™i nghá»‹",
+        "Definition": "Hội nghị",
         "IsBookmarked": true
       }
     ],
@@ -82,25 +82,25 @@
       {
         "Id": 1,
         "Term": "Arigatou",
-        "Definition": "Cáº£m Æ¡n",
+        "Definition": "Cảm ơn",
         "IsBookmarked": true
       },
       {
         "Id": 2,
         "Term": "Sumimasen",
-        "Definition": "Xin lá»—i / Xin phÃ©p",
+        "Definition": "Xin lỗi / Xin phép",
         "IsBookmarked": false
       },
       {
         "Id": 3,
         "Term": "Ohayou",
-        "Definition": "ChÃ o buá»•i sÃ¡ng",
+        "Definition": "Chào buổi sáng",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Konnichiwa",
-        "Definition": "Xin chÃ o (ban ngÃ y)",
+        "Definition": "Xin chào (Ban ngày)",
         "IsBookmarked": false
       }
     ],
