@@ -10,13 +10,11 @@
         WindowStartupLocation="CenterScreen"
         Background="#F0F0F0">
 
-    <!-- DataContext -->
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
 
     <Window.Resources>
-        <!-- Style cho Button chính -->
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#007ACC"/>
             <Setter Property="Foreground" Value="White"/>
@@ -27,7 +25,6 @@
             <Setter Property="FontSize" Value="13"/>
         </Style>
 
-        <!-- Style cho Button nguy hiểm (xóa) -->
         <Style x:Key="DangerButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#DC3545"/>
             <Setter Property="Foreground" Value="White"/>
@@ -38,7 +35,6 @@
             <Setter Property="FontSize" Value="13"/>
         </Style>
 
-        <!-- Style cho Button thành công -->
         <Style x:Key="SuccessButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#28A745"/>
             <Setter Property="Foreground" Value="White"/>
@@ -57,7 +53,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- HEADER -->
         <Border Grid.Row="0" Background="White" Padding="15" CornerRadius="8" Margin="0,0,0,15">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
@@ -86,14 +81,12 @@
             </Grid>
         </Border>
 
-        <!-- MAIN CONTENT -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="320"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- PANEL TRÁI: QUẢN LÝ DECK -->
             <Border Grid.Column="0" Background="White" 
                     CornerRadius="8" Margin="0,0,10,0" Padding="15">
                 <Border.Effect>
@@ -103,31 +96,35 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-
-                    <!-- Tiêu đề -->
                     <TextBlock Grid.Row="0" Text="📚 Danh Sách Bộ Thẻ" 
                                FontSize="16" FontWeight="SemiBold" 
                                Margin="0,0,0,15" Foreground="#333"/>
 
-                    <!-- Form tạo deck mới -->
-                    <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="5" Padding="10" Margin="0,0,0,15">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
+                        <Button Content="➕ Tạo Deck Mới"
+                                Command="{Binding CreateDeckCommand}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Margin="0,0,10,0"/>
+
+                        <Button Content="⬆️ Import từ Excel"
+                                Command="{Binding ImportDeckCommand}"
+                                Style="{StaticResource SuccessButtonStyle}"
+                                Margin="0,0,10,0" Click="Button_Click"/>
+                    </StackPanel>
+                    <Border Grid.Row="2" Background="#F8F9FA" CornerRadius="5" Padding="10" Margin="0,0,0,15">
                         <StackPanel>
-                            <TextBlock Text="Tạo bộ thẻ mới:" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                            <TextBlock Text="Tên bộ thẻ:" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,8"/>
                             <TextBox Text="{Binding NewDeckName, UpdateSourceTrigger=PropertyChanged}" 
                                      Padding="10" FontSize="13" 
                                      BorderBrush="#DDD" BorderThickness="1"/>
-                            <Button Content="➕ Tạo Bộ Thẻ" 
-                                    Command="{Binding CreateDeckCommand}"
-                                    Style="{StaticResource SuccessButtonStyle}"
-                                    HorizontalAlignment="Left" Margin="0,8,0,0"/>
                         </StackPanel>
                     </Border>
 
-                    <!-- Danh sách Deck -->
-                    <ListBox Grid.Row="2" 
+                    <ListBox Grid.Row="3" 
                              ItemsSource="{Binding Decks}" 
                              SelectedItem="{Binding SelectedDeck}"
                              BorderThickness="1" BorderBrush="#E0E0E0">
@@ -150,15 +147,13 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <!-- Button xóa deck -->
-                    <Button Grid.Row="3" Content="🗑️ Xóa Bộ Thẻ Đã Chọn" 
+                    <Button Grid.Row="4" Content="🗑️ Xóa Bộ Thẻ Đã Chọn" 
                             Command="{Binding DeleteDeckCommand}"
                             Style="{StaticResource DangerButtonStyle}"
                             HorizontalAlignment="Stretch" Margin="0,15,0,0"/>
                 </Grid>
             </Border>
 
-            <!-- PANEL PHẢI: QUẢN LÝ FLASHCARD -->
             <Border Grid.Column="1" Background="White" 
                     CornerRadius="8" Margin="10,0,0,0" Padding="15">
                 <Border.Effect>
@@ -172,14 +167,12 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Tiêu đề -->
                     <TextBlock Grid.Row="0" FontSize="16" FontWeight="SemiBold" 
                                Margin="0,0,0,15" Foreground="#333">
                         <Run Text="🃏 Flashcards - "/>
                         <Run Text="{Binding SelectedDeck.Name, FallbackValue='(Chọn bộ thẻ)'}"/>
                     </TextBlock>
 
-                    <!-- Form thêm flashcard mới -->
                     <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="5" Padding="15" Margin="0,0,0,15">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -216,7 +209,6 @@
                         </Grid>
                     </Border>
 
-                    <!-- Danh sách Flashcard -->
                     <ListView Grid.Row="2" 
                               ItemsSource="{Binding Flashcards}" 
                               SelectedItem="{Binding SelectedFlashcard}"
@@ -240,7 +232,6 @@
                         </ListView.View>
                     </ListView>
 
-                    <!-- Buttons quản lý flashcard -->
                     <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,15,0,0">
                         <Button Content="🗑️ Xóa Thẻ" 
                                 Command="{Binding DeleteFlashcardCommand}"
@@ -257,7 +248,6 @@
             </Border>
         </Grid>
 
-        <!-- STATUS BAR -->
         <Border Grid.Row="2" Background="#333" Padding="12,8" Margin="0,15,0,0" CornerRadius="5">
             <Grid>
                 <Grid.ColumnDefinitions>

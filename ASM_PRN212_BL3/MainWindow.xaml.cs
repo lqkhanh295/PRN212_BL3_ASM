@@ -23,5 +23,10 @@ namespace ASM_PRN212_BL3
             loginWindow.Show();
             this.Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

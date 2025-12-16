@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using ASM.Bussiness.Services;
+using ASM.Entities.Models;
+using System.IO; 
+using Microsoft.Win32;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using ASM.Bussiness.Services;
-using ASM.Entities.Models;
 
 namespace ASM_PRN212_BL3.ViewModels
 {
@@ -107,6 +109,9 @@ namespace ASM_PRN212_BL3.ViewModels
         // Command để xóa thẻ đang chọn
         public ICommand DeleteFlashcardCommand { get; }
 
+        // Command để import Deck từ file Excel
+        public ICommand ImportDeckCommand { get; }
+
         // Command để toggle bookmark
         public ICommand ToggleBookmarkCommand { get; }
 
@@ -127,6 +132,8 @@ namespace ASM_PRN212_BL3.ViewModels
             AddFlashcardCommand = new RelayCommand(_ => AddFlashcard(), _ => CanAddFlashcard());
             DeleteFlashcardCommand = new RelayCommand(_ => DeleteFlashcard(), _ => SelectedFlashcard != null);
             ToggleBookmarkCommand = new RelayCommand<Flashcard>(ToggleBookmark);
+            // Import Command
+            ImportDeckCommand = new RelayCommand(ExecuteImportDeck);
 
             // Tự động load dữ liệu khi khởi tạo
             LoadDecks();
@@ -290,5 +297,55 @@ namespace ASM_PRN212_BL3.ViewModels
         }
 
         #endregion
+
+        /// <summary>
+        /// Mở hộp thoại chọn file và thực hiện import Deck từ Excel
+        /// </summary>
+        private void ExecuteImportDeck(object? parameter)
+        {
+            // 1. Mở hộp thoại chọn file
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "Excel Files (*.xlsx)|*.xlsx",
+                Title = "Chọn file Excel để Import Bộ thẻ"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    string filePath = openFileDialog.FileName;
+                    string deckName = Path.GetFileNameWithoutExtension(filePath);
+
+                    StatusMessage = $"Đang import deck từ file '{deckName}'...";
+
+                    // 2. Gọi Service để thực hiện Import
+                    var newDeck = _deckService.ImportDeckFromExcel(filePath, deckName);
+
+                    if (newDeck != null)
+                    {
+                        // 3. Cập nhật UI: Thêm Deck mới vào danh sách
+                        // Cần dùng Dispatcher nếu bạn gọi từ luồng nền, nhưng trong MVVM Command 
+                        // thường chạy trên UI thread, nên không cần (nhưng dùng thì an toàn hơn)
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            Decks.Add(newDeck);
+                            SelectedDeck = newDeck;
+                            StatusMessage = $"✅ Import thành công! Deck '{newDeck.Name}' có {newDeck.CardCount} thẻ.";
+                        });
+                    }
+                    else
+                    {
+                        StatusMessage = "❌ Import thất bại. File rỗng hoặc có lỗi cấu trúc.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Hiển thị lỗi rõ ràng cho người dùng
+                    MessageBox.Show(ex.Message, "Lỗi Import Excel", MessageBoxButton.OK, MessageBoxImage.Error);
+                    StatusMessage = $"❌ Import thất bại: {ex.Message.Substring(0, Math.Min(ex.Message.Length, 80))}...";
+                }
+            }
+        }
     }
 }
