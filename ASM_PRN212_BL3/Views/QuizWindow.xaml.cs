@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using ASM.Bussiness.Services;
 using ASM.Entities.Models;
 
@@ -133,7 +134,7 @@ namespace ASM_PRN212_BL3.Views
             {
                 txtCardLabel.Text = "THUAT NGU";
                 txtCardContent.Text = card.Term;
-                cardBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F8F9FA"));
+                cardBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FAFBFC"));
                 pnlAssessment.Visibility = Visibility.Collapsed;
             }
 
@@ -166,14 +167,39 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Lat the (click vao the)
+        /// Lat the (click vao the) voi animation
         /// </summary>
         private void CardBorder_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (_currentCards.Count == 0) return;
 
-            _isShowingDefinition = !_isShowingDefinition;
-            DisplayCurrentCard();
+            // Tao animation flip - scale xuong 0
+            var flipOut = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = TimeSpan.FromMilliseconds(150),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+            };
+
+            // Khi animation scale xuong xong, doi noi dung va scale len lai
+            flipOut.Completed += (s, args) =>
+            {
+                _isShowingDefinition = !_isShowingDefinition;
+                DisplayCurrentCard();
+
+                var flipIn = new DoubleAnimation
+                {
+                    From = 0.0,
+                    To = 1.0,
+                    Duration = TimeSpan.FromMilliseconds(150),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                };
+
+                CardScale.BeginAnimation(ScaleTransform.ScaleXProperty, flipIn);
+            };
+
+            CardScale.BeginAnimation(ScaleTransform.ScaleXProperty, flipOut);
         }
 
         /// <summary>
@@ -308,16 +334,18 @@ namespace ASM_PRN212_BL3.Views
             // Doi mau theo ket qua
             if (percent >= 80)
             {
-                pnlResult.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#28A745"));
+                pnlResult.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#27AE60"));
+                txtResult.Foreground = new SolidColorBrush(Colors.White);
             }
             else if (percent >= 50)
             {
-                pnlResult.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFC107"));
-                txtResult.Foreground = new SolidColorBrush(Colors.Black);
+                pnlResult.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F39C12"));
+                txtResult.Foreground = new SolidColorBrush(Colors.White);
             }
             else
             {
-                pnlResult.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#DC3545"));
+                pnlResult.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E74C3C"));
+                txtResult.Foreground = new SolidColorBrush(Colors.White);
             }
 
             pnlResult.Visibility = Visibility.Visible;
@@ -341,6 +369,16 @@ namespace ASM_PRN212_BL3.Views
         {
             var loginWindow = new LoginWindow();
             loginWindow.Show();
+            this.Close();
+        }
+
+        /// <summary>
+        /// Chuyen sang che do ghep the
+        /// </summary>
+        private void BtnMatchingMode_Click(object sender, RoutedEventArgs e)
+        {
+            var matchingWindow = new MatchingQuizWindow();
+            matchingWindow.Show();
             this.Close();
         }
     }

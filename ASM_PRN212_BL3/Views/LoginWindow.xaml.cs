@@ -5,7 +5,7 @@ namespace ASM_PRN212_BL3.Views
 {
     /// <summary>
     /// Cua so chon phuong thuc dang nhap
-    /// Cho phep chon vai tro: Admin, Student, hoac Guest
+    /// Cho phep chon vai tro: Admin hoac Student
     /// </summary>
     public partial class LoginWindow : Window
     {
@@ -44,22 +44,6 @@ namespace ASM_PRN212_BL3.Views
             };
 
             OpenQuizWindow(studentUser);
-        }
-
-        /// <summary>
-        /// Vao che do Khach (Guest)
-        /// </summary>
-        private void BtnGuest_Click(object sender, RoutedEventArgs e)
-        {
-            var guestUser = new User
-            {
-                Id = 0,
-                Username = "guest",
-                DisplayName = "Khach",
-                Role = UserRole.Student
-            };
-
-            OpenQuizWindow(guestUser);
         }
 
         /// <summary>

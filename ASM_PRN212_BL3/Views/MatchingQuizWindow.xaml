@@ -1,0 +1,344 @@
+<Window x:Class="ASM_PRN212_BL3.Views.MatchingQuizWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Ghep the - Matching Quiz" 
+        Height="750" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F7FA">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Border Grid.Row="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.1" ShadowDepth="0"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Name="txtTitle" Text="Ghep the" 
+                               FontSize="22" FontWeight="Bold" Foreground="#2C3E50"/>
+                    <TextBlock x:Name="txtDeckName" Text="Chon bo the de bat dau" 
+                               FontSize="13" Foreground="#7F8C8D" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <TextBlock Grid.Column="1" x:Name="txtScore" Text="1.5" 
+                           FontSize="32" FontWeight="Bold" 
+                           Foreground="#3498DB"
+                           VerticalAlignment="Center"
+                           Margin="0,0,20,0"/>
+
+                <Button x:Name="btnBack" Grid.Column="2" 
+                        Content="?? Quay lai" 
+                        Padding="20,10"
+                        Background="#95A5A6"
+                        Foreground="White"
+                        BorderThickness="0"
+                        FontSize="13"
+                        FontWeight="SemiBold"
+                        Cursor="Hand"
+                        Click="BtnBack_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                                CornerRadius="6" 
+                                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#7F8C8D"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- MAIN CONTENT -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT: Danh sach Deck -->
+            <Border Grid.Column="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,15,0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Opacity="0.1" ShadowDepth="0"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="?? Chon bo the" 
+                               FontSize="16" FontWeight="Bold" 
+                               Foreground="#2C3E50"
+                               Margin="0,0,0,15"/>
+
+                    <ListBox x:Name="lstDecks" Grid.Row="1"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             SelectionChanged="LstDecks_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="12" Margin="0,0,0,8" 
+                                        Background="#F8F9FA" 
+                                        CornerRadius="6"
+                                        Cursor="Hand">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#E8F4F8"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" 
+                                                   FontSize="14" FontWeight="SemiBold"
+                                                   Foreground="#2C3E50"/>
+                                        <TextBlock FontSize="11" Foreground="#95A5A6" Margin="0,4,0,0">
+                                            <Run Text="{Binding CardCount, Mode=OneWay}"/>
+                                            <Run Text=" the"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <ContentPresenter/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+
+                    <Button Grid.Row="2" x:Name="btnStartQuiz" 
+                            Content="?? Bat dau ghep the" 
+                            Padding="15,12"
+                            Background="#3498DB"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="13"
+                            FontWeight="SemiBold"
+                            Cursor="Hand"
+                            Margin="0,15,0,0"
+                            Click="BtnStartQuiz_Click"
+                            IsEnabled="False">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                                    CornerRadius="6" 
+                                                    Padding="{TemplateBinding Padding}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#2980B9"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- RIGHT: Matching Grid -->
+            <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="30" Margin="15,0,0,0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Opacity="0.1" ShadowDepth="0"/>
+                </Border.Effect>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid x:Name="gridMatching">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Progress -->
+                        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                            <TextBlock x:Name="txtProgress" Text="Tien do: 0 / 0" 
+                                       FontSize="15" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       Foreground="#34495E"/>
+                            <ProgressBar x:Name="progressBar" Height="6" Margin="0,10,0,0"
+                                         Background="#ECF0F1" 
+                                         Foreground="#27AE60"
+                                         BorderThickness="0">
+                                <ProgressBar.Style>
+                                    <Style TargetType="ProgressBar">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ProgressBar">
+                                                    <Grid>
+                                                        <Border Background="{TemplateBinding Background}" 
+                                                                CornerRadius="3"/>
+                                                        <Border Background="{TemplateBinding Foreground}" 
+                                                                CornerRadius="3"
+                                                                Width="{TemplateBinding Value}"
+                                                                HorizontalAlignment="Left"/>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ProgressBar.Style>
+                            </ProgressBar>
+                        </StackPanel>
+
+                        <!-- Matching Cards Container -->
+                        <ItemsControl x:Name="itemsMatching" Grid.Row="1">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="3" Rows="4"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="8" 
+                                            Background="{Binding Background}" 
+                                            CornerRadius="12" 
+                                            Padding="20"
+                                            Cursor="Hand"
+                                            MouseLeftButtonDown="Card_Click"
+                                            Tag="{Binding Id}">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="15" Opacity="0.15" ShadowDepth="3"/>
+                                        </Border.Effect>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Label}" 
+                                                       FontSize="11" 
+                                                       Foreground="#95A5A6"
+                                                       FontWeight="SemiBold"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="0,0,0,10"/>
+                                            <TextBlock Text="{Binding Content}" 
+                                                       FontSize="16" 
+                                                       FontWeight="SemiBold"
+                                                       TextWrapping="Wrap"
+                                                       TextAlignment="Center"
+                                                       Foreground="#2C3E50"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- Initial message -->
+                        <TextBlock x:Name="txtInitialMessage" 
+                                   Grid.Row="1"
+                                   Text="Chon bo the va nhan 'Bat dau ghep the' de bat dau!"
+                                   FontSize="18"
+                                   Foreground="#95A5A6"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="Center"/>
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- FOOTER: Result -->
+        <Border Grid.Row="2" x:Name="pnlResult" 
+                Background="#27AE60" 
+                CornerRadius="10" 
+                Padding="20" 
+                Margin="0,20,0,0"
+                Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.15" ShadowDepth="0"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Name="txtResult" 
+                               Text="Hoan thanh! Diem: 0" 
+                               FontSize="18" 
+                               FontWeight="Bold" 
+                               Foreground="White"/>
+                    <TextBlock x:Name="txtResultDetail" 
+                               Text="" 
+                               FontSize="13" 
+                               Foreground="#E8F8F5" 
+                               Margin="0,5,0,0"/>
+                </StackPanel>
+
+                <Button Grid.Column="1" 
+                        x:Name="btnRestart" 
+                        Content="?? Lam lai" 
+                        Padding="20,10"
+                        Background="White" 
+                        Foreground="#27AE60"
+                        FontSize="13"
+                        FontWeight="Bold"
+                        BorderThickness="0" 
+                        Cursor="Hand"
+                        Click="BtnRestart_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                                CornerRadius="6" 
+                                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#ECF0F1"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

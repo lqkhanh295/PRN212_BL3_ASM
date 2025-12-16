@@ -20,30 +20,36 @@ namespace ASM.Data.Repositories
         /// </summary>
         public JsonRepository()
         {
-            // File data.json ???c l?u cùng th? m?c v?i ?ng d?ng
-            _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data.json");
+            // Tìm th? m?c g?c project (thay vì bin/Debug)
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            
+            // Di chuy?n lên 3 c?p: bin\Debug\net9.0-windows -> project root
+            string projectRoot = Path.GetFullPath(Path.Combine(baseDirectory, "..", "..", ".."));
+            
+            // File data.json ? th? m?c g?c project
+            _filePath = Path.Combine(projectRoot, "data.json");
 
-            // C?u hình JSON: indent ?? d? ??c, cho phép ti?ng Vi?t
+            // C?u h?nh JSON: indent ?? d? ??c, cho ph?p ti?ng Vi?t
             _jsonOptions = new JsonSerializerOptions
             {
                 WriteIndented = true, // Format JSON ??p, d? ??c
-                PropertyNameCaseInsensitive = true, // Không phân bi?t hoa th??ng khi ??c
+                PropertyNameCaseInsensitive = true, // Kh?ng ph?n bi?t hoa th??ng khi ??c
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // H? tr? ti?ng Vi?t
             };
         }
 
         /// <summary>
-        /// ??c t?t c? các Deck t? file JSON
+        /// ??c t?t c? c?c Deck t? file JSON
         /// </summary>
-        /// <returns>Danh sách Deck, tr? v? list r?ng n?u file ch?a t?n t?i</returns>
+        /// <returns>Danh s?ch Deck, tr? v? list r?ng n?u file ch?a t?n t?i</returns>
         public List<Deck> GetAllDecks()
         {
             try
             {
-                // Ki?m tra file có t?n t?i không
+                // Ki?m tra file c? t?n t?i kh?ng
                 if (!File.Exists(_filePath))
                 {
-                    // File ch?a có -> tr? v? list r?ng
+                    // File ch?a c? -> tr? v? list r?ng
                     return new List<Deck>();
                 }
 
@@ -56,7 +62,7 @@ namespace ASM.Data.Repositories
                     return new List<Deck>();
                 }
 
-                // Chuy?n ??i JSON thành List<Deck>
+                // Chuy?n ??i JSON th?nh List<Deck>
                 var decks = JsonSerializer.Deserialize<List<Deck>>(jsonContent, _jsonOptions);
 
                 // Tr? v? list deck ho?c list r?ng n?u null
@@ -64,33 +70,36 @@ namespace ASM.Data.Repositories
             }
             catch (Exception ex)
             {
-                // Ghi log l?i (trong th?c t? nên dùng logging framework)
+                // Ghi log l?i (trong th?c t? n?n d?ng logging framework)
                 Console.WriteLine($"L?i khi ??c file JSON: {ex.Message}");
+                Console.WriteLine($"???ng d?n file: {_filePath}");
                 return new List<Deck>();
             }
         }
 
         /// <summary>
-        /// L?u t?t c? Deck xu?ng file JSON (ghi ?è toàn b?)
+        /// L?u t?t c? Deck xu?ng file JSON (ghi ?? toán b?)
         /// </summary>
-        /// <param name="decks">Danh sách Deck c?n l?u</param>
-        /// <returns>True n?u l?u thành công, False n?u có l?i</returns>
+        /// <param name="decks">Danh s?ch Deck c?n l?u</param>
+        /// <returns>True n?u l?u th?nh c?ng, False n?u c? l?i</returns>
         public bool SaveAllDecks(List<Deck> decks)
         {
             try
             {
-                // Chuy?n ??i List<Deck> thành chu?i JSON
+                // Chuy?n ??i List<Deck> th?nh chu?i JSON
                 string jsonContent = JsonSerializer.Serialize(decks, _jsonOptions);
 
-                // Ghi ?è xu?ng file
+                // Ghi ?? xu?ng file
                 File.WriteAllText(_filePath, jsonContent);
 
+                Console.WriteLine($"?? l?u d? li?u v?o: {_filePath}");
                 return true;
             }
             catch (Exception ex)
             {
                 // Ghi log l?i
                 Console.WriteLine($"L?i khi ghi file JSON: {ex.Message}");
+                Console.WriteLine($"???ng d?n file: {_filePath}");
                 return false;
             }
         }

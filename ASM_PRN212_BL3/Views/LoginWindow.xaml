@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Chon Phuong Thuc - Flashcard Quiz App" 
-        Height="520" Width="480"
+        Height="480" Width="480"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Background="#F5F5F5">
@@ -89,29 +89,6 @@
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="Sinh Vien (Student)" FontWeight="SemiBold" FontSize="14"/>
                             <TextBlock Text="Hoc va lam quiz" FontSize="11" Opacity="0.85"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Button>
-
-                <!-- Button Guest -->
-                <Button x:Name="btnGuest" 
-                        Padding="20,18"
-                        FontSize="15"
-                        Background="#6C757D"
-                        Foreground="White"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        HorizontalContentAlignment="Stretch"
-                        Click="BtnGuest_Click">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Border Background="#545B62" Width="40" Height="40" CornerRadius="20" Margin="0,0,15,0">
-                            <TextBlock Text="G" FontSize="18" FontWeight="Bold" 
-                                       Foreground="White" HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"/>
-                        </Border>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Khach (Guest)" FontWeight="SemiBold" FontSize="14"/>
-                            <TextBlock Text="Xem va hoc thu" FontSize="11" Opacity="0.85"/>
                         </StackPanel>
                     </StackPanel>
                 </Button>
