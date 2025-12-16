@@ -1,110 +1,110 @@
-[
+﻿[
   {
     "Id": 1,
-    "Name": "Tiếng Anh cơ bản",
-    "CreatedDate": "2024-01-15T10:00:00",
+    "Name": "Tiáº¿ng Anh cÆ¡ báº£n",
     "Flashcards": [
       {
         "Id": 1,
         "Term": "Hello",
-        "Definition": "Xin chào",
-        "IsBookmarked": false
+        "Definition": "Xin chÃ o",
+        "IsBookmarked": true
       },
       {
         "Id": 2,
         "Term": "Goodbye",
-        "Definition": "Tạm biệt",
+        "Definition": "Táº¡m biá»‡t",
         "IsBookmarked": true
       },
       {
         "Id": 3,
         "Term": "Thank you",
-        "Definition": "Cảm ơn",
+        "Definition": "Cáº£m Æ¡n",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Sorry",
-        "Definition": "Xin lỗi",
+        "Definition": "Xin lá»—i",
         "IsBookmarked": false
       },
       {
         "Id": 5,
         "Term": "Please",
-        "Definition": "Làm ơn",
+        "Definition": "LÃ m Æ¡n",
         "IsBookmarked": false
       },
       {
         "Id": 6,
         "Term": "Consider",
-        "Definition": "Tin rằng",
+        "Definition": "Tin ráº±ng",
         "IsBookmarked": false
       }
     ],
+    "CreatedDate": "2024-01-15T10:00:00",
     "CardCount": 6
   },
   {
     "Id": 2,
-    "Name": "Từ vựng TOEIC",
-    "CreatedDate": "2024-01-16T14:30:00",
+    "Name": "Tá»« vá»±ng TOEIC",
     "Flashcards": [
       {
         "Id": 1,
         "Term": "Agreement",
-        "Definition": "Thỏa thuận, hợp đồng",
+        "Definition": "Thá»a thuáº­n, há»£p Ä‘á»“ng",
         "IsBookmarked": true
       },
       {
         "Id": 2,
         "Term": "Appointment",
-        "Definition": "Cuộc hẹn",
+        "Definition": "Cuá»™c háº¹n",
         "IsBookmarked": false
       },
       {
         "Id": 3,
         "Term": "Budget",
-        "Definition": "Ngân sách",
+        "Definition": "NgÃ¢n sÃ¡ch",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Conference",
-        "Definition": "Hội nghị",
+        "Definition": "Há»™i nghá»‹",
         "IsBookmarked": true
       }
     ],
+    "CreatedDate": "2024-01-16T14:30:00",
     "CardCount": 4
   },
   {
     "Id": 3,
-    "Name": "Tiếng Nhật N5",
-    "CreatedDate": "2024-01-17T09:00:00",
+    "Name": "Tiáº¿ng Nháº­t N5",
     "Flashcards": [
       {
         "Id": 1,
         "Term": "Arigatou",
-        "Definition": "Cảm ơn",
+        "Definition": "Cáº£m Æ¡n",
         "IsBookmarked": true
       },
       {
         "Id": 2,
         "Term": "Sumimasen",
-        "Definition": "Xin lỗi / Xin phép",
+        "Definition": "Xin lá»—i / Xin phÃ©p",
         "IsBookmarked": false
       },
       {
         "Id": 3,
         "Term": "Ohayou",
-        "Definition": "Chào buổi sáng",
+        "Definition": "ChÃ o buá»•i sÃ¡ng",
         "IsBookmarked": false
       },
       {
         "Id": 4,
         "Term": "Konnichiwa",
-        "Definition": "Xin chào (ban ngày)",
+        "Definition": "Xin chÃ o (ban ngÃ y)",
         "IsBookmarked": false
       }
     ],
+    "CreatedDate": "2024-01-17T09:00:00",
     "CardCount": 4
   }
 ]

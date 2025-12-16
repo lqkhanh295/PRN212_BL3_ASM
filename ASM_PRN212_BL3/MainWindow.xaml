@@ -6,51 +6,99 @@
         xmlns:vm="clr-namespace:ASM_PRN212_BL3.ViewModels"
         mc:Ignorable="d"
         Title="Quản Lý Flashcard - Chế Độ Quản Trị" 
-        Height="650" Width="1050"
+        Height="800" Width="1200"
         WindowStartupLocation="CenterScreen"
-        Background="#F0F0F0">
+        Background="#F5F7FA">
 
-    <!-- DataContext -->
-    <Window.DataContext>
-        <vm:MainViewModel />
-    </Window.DataContext>
+    <!-- DataContext is set in code-behind to avoid XAML type resolution issues -->
 
     <Window.Resources>
         <!-- Style cho Button chính -->
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Background" Value="#4A90E2"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Padding" Value="16,10"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#357ABD"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <!-- Style cho Button nguy hiểm (xóa) -->
         <Style x:Key="DangerButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#DC3545"/>
+            <Setter Property="Background" Value="#E74C3C"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Padding" Value="16,10"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#C0392B"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <!-- Style cho Button thành công -->
         <Style x:Key="SuccessButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#28A745"/>
+            <Setter Property="Background" Value="#2ECC71"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Padding" Value="16,10"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#27AE60"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
 
-    <Grid Margin="15">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -58,9 +106,9 @@
         </Grid.RowDefinitions>
 
         <!-- HEADER -->
-        <Border Grid.Row="0" Background="White" Padding="15" CornerRadius="8" Margin="0,0,0,15">
+        <Border Grid.Row="0" Background="White" Padding="20" CornerRadius="12" Margin="0,0,0,20">
             <Border.Effect>
-                <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+                <DropShadowEffect BlurRadius="20" Opacity="0.12" ShadowDepth="4"/>
             </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -68,36 +116,42 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0">
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="🎴 Flashcard Quiz - " 
-                                   FontSize="22" FontWeight="Bold" Foreground="#333"/>
-                        <TextBlock Text="Bảng Điều Khiển Quản Trị" 
-                                   FontSize="22" FontWeight="Bold" Foreground="#007ACC"/>
+                        <Border Background="#4A90E2" Width="50" Height="50" CornerRadius="10" 
+                                Margin="0,0,15,0" VerticalAlignment="Center">
+                            <TextBlock Text="📇" FontSize="28" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Flashcard Manager" 
+                                       FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
+                            <TextBlock Text="Quản lý bộ thẻ và flashcard của bạn" 
+                                       FontSize="13" Foreground="#7F8C8D" Margin="0,2,0,0"/>
+                        </StackPanel>
                     </StackPanel>
-                    <TextBlock Text="Quản lý bộ thẻ và flashcard" 
-                               FontSize="12" Foreground="#666"/>
                 </StackPanel>
 
                 <Button x:Name="btnLogout" Grid.Column="1" 
                         Content="🚪 Đăng Xuất" 
                         Style="{StaticResource DangerButtonStyle}"
-                        Click="BtnLogout_Click"/>
+                        Click="BtnLogout_Click"
+                        VerticalAlignment="Center"/>
             </Grid>
         </Border>
 
         <!-- MAIN CONTENT -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="340"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- PANEL TRÁI: QUẢN LÝ DECK -->
             <Border Grid.Column="0" Background="White" 
-                    CornerRadius="8" Margin="0,0,10,0" Padding="15">
+                    CornerRadius="12" Margin="0,0,12,0" Padding="20">
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+                    <DropShadowEffect BlurRadius="20" Opacity="0.12" ShadowDepth="4"/>
                 </Border.Effect>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -108,21 +162,48 @@
                     </Grid.RowDefinitions>
 
                     <!-- Tiêu đề -->
-                    <TextBlock Grid.Row="0" Text="📚 Danh Sách Bộ Thẻ" 
-                               FontSize="16" FontWeight="SemiBold" 
-                               Margin="0,0,0,15" Foreground="#333"/>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                        <Border Background="#E8F4F8" Width="40" Height="40" CornerRadius="8" 
+                                Margin="0,0,12,0">
+                            <TextBlock Text="📚" FontSize="20" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Danh Sách Bộ Thẻ" 
+                                   FontSize="18" FontWeight="Bold" 
+                                   Foreground="#2C3E50" VerticalAlignment="Center"/>
+                    </StackPanel>
 
                     <!-- Form tạo deck mới -->
-                    <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="5" Padding="10" Margin="0,0,0,15">
+                    <Border Grid.Row="1" Background="#F8FAFB" CornerRadius="8" 
+                            Padding="15" Margin="0,0,0,20" BorderBrush="#E1E8ED" BorderThickness="1">
                         <StackPanel>
-                            <TextBlock Text="Tạo bộ thẻ mới:" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                            <TextBlock Text="Tạo bộ thẻ mới" FontSize="13" 
+                                       FontWeight="SemiBold" Margin="0,0,0,10" Foreground="#34495E"/>
                             <TextBox Text="{Binding NewDeckName, UpdateSourceTrigger=PropertyChanged}" 
-                                     Padding="10" FontSize="13" 
-                                     BorderBrush="#DDD" BorderThickness="1"/>
+                                     Padding="12,10" FontSize="13" 
+                                     BorderBrush="#D5DBDB" BorderThickness="1">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TextBox">
+                                                    <Border Background="{TemplateBinding Background}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="6">
+                                                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
                             <Button Content="➕ Tạo Bộ Thẻ" 
                                     Command="{Binding CreateDeckCommand}"
                                     Style="{StaticResource SuccessButtonStyle}"
-                                    HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                                    HorizontalAlignment="Stretch" Margin="0,12,0,0"/>
                         </StackPanel>
                     </Border>
 
@@ -130,21 +211,49 @@
                     <ListBox Grid.Row="2" 
                              ItemsSource="{Binding Decks}" 
                              SelectedItem="{Binding SelectedDeck}"
-                             BorderThickness="1" BorderBrush="#E0E0E0">
+                             BorderThickness="0" Background="Transparent"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Padding="12" Margin="2" Background="#FAFAFA" CornerRadius="5">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Name}" 
-                                                   FontSize="14" FontWeight="SemiBold" Foreground="#333"/>
-                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                            <TextBlock Text="📝 " FontSize="11"/>
-                                            <TextBlock FontSize="11" Foreground="#666">
-                                                <Run Text="{Binding CardCount, Mode=OneWay}"/>
-                                                <Run Text=" thẻ"/>
-                                            </TextBlock>
+                                <Border Padding="15" Margin="0,0,0,10" 
+                                        Background="#F8FAFB" CornerRadius="8"
+                                        BorderBrush="#E1E8ED" BorderThickness="1">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#E8F4F8"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" Background="#4A90E2" 
+                                                Width="35" Height="35" CornerRadius="8" 
+                                                Margin="0,0,12,0">
+                                            <TextBlock Text="📋" FontSize="18" 
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center"/>
+                                        </Border>
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" 
+                                                       FontSize="14" FontWeight="SemiBold" 
+                                                       Foreground="#2C3E50"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                                <TextBlock Text="📝" FontSize="11" Margin="0,0,5,0"/>
+                                                <TextBlock FontSize="12" Foreground="#7F8C8D">
+                                                    <Run Text="{Binding CardCount, Mode=OneWay}"/>
+                                                    <Run Text=" thẻ"/>
+                                                </TextBlock>
+                                            </StackPanel>
                                         </StackPanel>
-                                    </StackPanel>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -154,15 +263,15 @@
                     <Button Grid.Row="3" Content="🗑️ Xóa Bộ Thẻ Đã Chọn" 
                             Command="{Binding DeleteDeckCommand}"
                             Style="{StaticResource DangerButtonStyle}"
-                            HorizontalAlignment="Stretch" Margin="0,15,0,0"/>
+                            HorizontalAlignment="Stretch" Margin="0,20,0,0"/>
                 </Grid>
             </Border>
 
             <!-- PANEL PHẢI: QUẢN LÝ FLASHCARD -->
             <Border Grid.Column="1" Background="White" 
-                    CornerRadius="8" Margin="10,0,0,0" Padding="15">
+                    CornerRadius="12" Margin="12,0,0,0" Padding="20">
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+                    <DropShadowEffect BlurRadius="20" Opacity="0.12" ShadowDepth="4"/>
                 </Border.Effect>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -173,46 +282,97 @@
                     </Grid.RowDefinitions>
 
                     <!-- Tiêu đề -->
-                    <TextBlock Grid.Row="0" FontSize="16" FontWeight="SemiBold" 
-                               Margin="0,0,0,15" Foreground="#333">
-                        <Run Text="🃏 Flashcards - "/>
-                        <Run Text="{Binding SelectedDeck.Name, FallbackValue='(Chọn bộ thẻ)'}"/>
-                    </TextBlock>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                        <Border Background="#FFF4E6" Width="40" Height="40" CornerRadius="8" 
+                                Margin="0,0,12,0">
+                            <TextBlock Text="🎴" FontSize="20" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="18" FontWeight="Bold" Foreground="#2C3E50">
+                                <Run Text="Flashcards - "/>
+                                <Run Text="{Binding SelectedDeck.Name, FallbackValue='Chọn bộ thẻ'}" 
+                                     Foreground="#4A90E2"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
 
                     <!-- Form thêm flashcard mới -->
-                    <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="5" Padding="15" Margin="0,0,0,15">
+                    <Border Grid.Row="1" Background="#F8FAFB" CornerRadius="8" 
+                            Padding="20" Margin="0,0,0,20" BorderBrush="#E1E8ED" BorderThickness="1">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.ColumnSpan="3" 
-                                       Text="Thêm thẻ mới:" FontSize="12" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                            <TextBlock Grid.Row="0" Text="Thêm thẻ mới" FontSize="13" 
+                                       FontWeight="SemiBold" Margin="0,0,0,15" Foreground="#34495E"/>
 
-                            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
-                                <TextBlock Text="Thuật ngữ (Term):" FontSize="11" Margin="0,0,0,5" Foreground="#666"/>
-                                <TextBox Text="{Binding NewTerm, UpdateSourceTrigger=PropertyChanged}" 
-                                         Padding="10" FontSize="13"
-                                         BorderBrush="#DDD" BorderThickness="1"/>
-                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,0,10,0">
-                                <TextBlock Text="Định nghĩa (Definition):" FontSize="11" Margin="0,0,0,5" Foreground="#666"/>
-                                <TextBox Text="{Binding NewDefinition, UpdateSourceTrigger=PropertyChanged}" 
-                                         Padding="10" FontSize="13"
-                                         BorderBrush="#DDD" BorderThickness="1"/>
-                            </StackPanel>
+                                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                    <TextBlock Text="Thuật ngữ (Term)" FontSize="11" 
+                                               Margin="0,0,0,6" Foreground="#7F8C8D"/>
+                                    <TextBox Text="{Binding NewTerm, UpdateSourceTrigger=PropertyChanged}" 
+                                             Padding="12,10" FontSize="13"
+                                             BorderBrush="#D5DBDB" BorderThickness="1">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox">
+                                                <Setter Property="Background" Value="White"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="TextBox">
+                                                            <Border Background="{TemplateBinding Background}"
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                                    CornerRadius="6">
+                                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </StackPanel>
 
-                            <Button Grid.Row="1" Grid.Column="2" Content="➕ Thêm" 
-                                    Command="{Binding AddFlashcardCommand}"
-                                    Style="{StaticResource SuccessButtonStyle}"
-                                    VerticalAlignment="Bottom"/>
+                                <StackPanel Grid.Column="1" Margin="10,0,10,0">
+                                    <TextBlock Text="Định nghĩa (Definition)" FontSize="11" 
+                                               Margin="0,0,0,6" Foreground="#7F8C8D"/>
+                                    <TextBox Text="{Binding NewDefinition, UpdateSourceTrigger=PropertyChanged}" 
+                                             Padding="12,10" FontSize="13"
+                                             BorderBrush="#D5DBDB" BorderThickness="1">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox">
+                                                <Setter Property="Background" Value="White"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="TextBox">
+                                                            <Border Background="{TemplateBinding Background}"
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                                    CornerRadius="6">
+                                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </StackPanel>
+
+                                <Button Grid.Column="2" Content="➕ Thêm" 
+                                        Command="{Binding AddFlashcardCommand}"
+                                        Style="{StaticResource SuccessButtonStyle}"
+                                        VerticalAlignment="Bottom" Margin="10,0,0,0"/>
+                            </Grid>
                         </Grid>
                     </Border>
 
@@ -220,19 +380,39 @@
                     <ListView Grid.Row="2" 
                               ItemsSource="{Binding Flashcards}" 
                               SelectedItem="{Binding SelectedFlashcard}"
-                              BorderThickness="1" BorderBrush="#E0E0E0">
+                              BorderThickness="1" BorderBrush="#E1E8ED"
+                              Background="White">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="ID" Width="50" 
-                                                DisplayMemberBinding="{Binding Id}"/>
-                                <GridViewColumn Header="Thuật Ngữ" Width="180" 
-                                                DisplayMemberBinding="{Binding Term}"/>
-                                <GridViewColumn Header="Định Nghĩa" Width="250" 
-                                                DisplayMemberBinding="{Binding Definition}"/>
-                                <GridViewColumn Header="⭐" Width="50">
+                                <GridViewColumn Header="ID" Width="60">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding IsBookmarked}" FontSize="11"/>
+                                            <TextBlock Text="{Binding Id}" FontSize="12" 
+                                                       Foreground="#7F8C8D" FontWeight="SemiBold"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Thuật Ngữ" Width="200">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Term}" FontSize="13" 
+                                                       Foreground="#2C3E50" FontWeight="SemiBold"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Định Nghĩa" Width="280">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Definition}" FontSize="13" 
+                                                       Foreground="#34495E" TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="⭐" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding IsBookmarked}" FontSize="12"
+                                                       HorizontalAlignment="Center"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -241,7 +421,8 @@
                     </ListView>
 
                     <!-- Buttons quản lý flashcard -->
-                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,15,0,0">
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" 
+                                HorizontalAlignment="Center" Margin="0,20,0,0">
                         <Button Content="🗑️ Xóa Thẻ" 
                                 Command="{Binding DeleteFlashcardCommand}"
                                 Style="{StaticResource DangerButtonStyle}"/>
@@ -258,7 +439,8 @@
         </Grid>
 
         <!-- STATUS BAR -->
-        <Border Grid.Row="2" Background="#333" Padding="12,8" Margin="0,15,0,0" CornerRadius="5">
+        <Border Grid.Row="2" Background="#2C3E50" Padding="15,12" 
+                Margin="0,20,0,0" CornerRadius="10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -266,9 +448,13 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Text="{Binding StatusMessage}" 
-                           Foreground="White" FontSize="12" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Text="Chế Độ Quản Trị" 
-                           Foreground="#28A745" FontSize="12" FontWeight="SemiBold"/>
+                           Foreground="White" FontSize="13" VerticalAlignment="Center"
+                           FontWeight="Medium"/>
+                <Border Grid.Column="1" Background="#2ECC71" 
+                        Padding="12,6" CornerRadius="6">
+                    <TextBlock Text="🔐 Chế Độ Quản Trị" 
+                               Foreground="White" FontSize="12" FontWeight="Bold"/>
+                </Border>
             </Grid>
         </Border>
     </Grid>

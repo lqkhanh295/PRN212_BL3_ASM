@@ -1,9 +1,9 @@
-[
+﻿[
   {
     "Id": 1,
     "Username": "admin",
     "Password": "admin123",
-    "DisplayName": "Quản Trị Viên",
+    "DisplayName": "Quáº£n Trá»‹ ViÃªn",
     "Role": 1,
     "CreatedDate": "2024-01-01T00:00:00"
   },
@@ -11,7 +11,7 @@
     "Id": 2,
     "Username": "student",
     "Password": "student123",
-    "DisplayName": "Sinh Viên Demo",
+    "DisplayName": "Sinh ViÃªn Demo",
     "Role": 0,
     "CreatedDate": "2024-01-01T00:00:00"
   },
@@ -24,3 +24,4 @@
     "CreatedDate": "2024-01-10T00:00:00"
   }
 ]
+

@@ -167,11 +167,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Lật thẻ (click vào thẻ)
-=======
-        /// Lat the (click vao the) voi animation
->>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
         /// </summary>
         private void CardBorder_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -381,9 +377,17 @@ namespace ASM_PRN212_BL3.Views
         /// </summary>
         private void BtnMatchingMode_Click(object sender, RoutedEventArgs e)
         {
-            var matchingWindow = new MatchingQuizWindow();
-            matchingWindow.Show();
-            this.Close();
+            try
+            {
+                var matchingWindow = new MatchingQuizWindow();
+                matchingWindow.Show();
+                this.Close();
+            }
+            catch (System.Exception ex)
+            {
+                // Show error details to help debugging
+                MessageBox.Show($"Lỗi khi mở chế độ Ghép thẻ:\n{ex.Message}\n\n{ex.StackTrace}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

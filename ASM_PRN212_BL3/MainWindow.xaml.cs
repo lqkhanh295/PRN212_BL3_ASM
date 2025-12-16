@@ -1,17 +1,19 @@
 ﻿using System.Windows;
 using ASM_PRN212_BL3.Views;
+using ASM_PRN212_BL3.ViewModels;
 
 namespace ASM_PRN212_BL3
 {
     /// <summary>
     /// MainWindow - Cửa sổ chính của ứng dụng
-    /// DataContext được gán trong XAML (MainViewModel)
+    /// DataContext được gán trong code-behind (MainViewModel)
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainViewModel();
         }
 
         /// <summary>
