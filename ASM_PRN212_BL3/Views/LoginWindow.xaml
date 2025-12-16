@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="Chọn Phương Thức - Flashcard Quiz App" 
         Height="676" Width="660"
+=======
+        Title="Chon Phuong Thuc - Flashcard Quiz App" 
+        Height="480" Width="480"
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Background="#F5F5F5">
@@ -93,6 +98,7 @@
                     </StackPanel>
                 </Button>
 
+<<<<<<< HEAD
                 <!-- Button Guest -->
                 <Button x:Name="btnGuest" 
                         Padding="20,18"
@@ -116,6 +122,8 @@
                     </StackPanel>
                 </Button>
 
+=======
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
                 <!-- Footer -->
                 <TextBlock Text="PRN212 - Flashcard Quiz Application" 
                            FontSize="10" 

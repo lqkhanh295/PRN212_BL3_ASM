@@ -4,8 +4,13 @@ using ASM.Entities.Models;
 namespace ASM_PRN212_BL3.Views
 {
     /// <summary>
+<<<<<<< HEAD
     /// Cửa sổ chọn phương thức đăng nhập
     /// Cho phép chọn vai trò: Admin, Student, hoặc Guest
+=======
+    /// Cua so chon phuong thuc dang nhap
+    /// Cho phep chon vai tro: Admin hoac Student
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
     /// </summary>
     public partial class LoginWindow : Window
     {
@@ -47,6 +52,7 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
+<<<<<<< HEAD
         /// Vào chế độ Khách (Guest)
         /// </summary>
         private void BtnGuest_Click(object sender, RoutedEventArgs e)
@@ -64,6 +70,9 @@ namespace ASM_PRN212_BL3.Views
 
         /// <summary>
         /// Mở cửa sổ Admin (MainWindow)
+=======
+        /// Mo cua so Admin (MainWindow)
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
         /// </summary>
         private void OpenAdminWindow(User user)
         {

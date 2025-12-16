@@ -21,6 +21,7 @@ namespace ASM.Data.Repositories
         public JsonRepository()
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             // File data.json được lưu cùng thư mục với ứng dụng
             _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data.json");
 
@@ -40,6 +41,17 @@ namespace ASM.Data.Repositories
             // File data.json ? th? m?c g?c project
             _filePath = Path.Combine(projectRoot, "data.json");
 
+=======
+            // T�m th? m?c g?c project (thay v� bin/Debug)
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            
+            // Di chuy?n l�n 3 c?p: bin\Debug\net9.0-windows -> project root
+            string projectRoot = Path.GetFullPath(Path.Combine(baseDirectory, "..", "..", ".."));
+            
+            // File data.json ? th? m?c g?c project
+            _filePath = Path.Combine(projectRoot, "data.json");
+
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
             // C?u h?nh JSON: indent ?? d? ??c, cho ph?p ti?ng Vi?t
             _jsonOptions = new JsonSerializerOptions
             {
@@ -52,9 +64,15 @@ namespace ASM.Data.Repositories
 
         /// <summary>
 <<<<<<< HEAD
+<<<<<<< HEAD
         /// Đọc tất cả các Deck từ file JSON
         /// </summary>
         /// <returns>Danh sách Deck, trả về list rỗng nếu file chưa tồn tại</returns>
+=======
+        /// ??c t?t c? c?c Deck t? file JSON
+        /// </summary>
+        /// <returns>Danh s?ch Deck, tr? v? list r?ng n?u file ch?a t?n t?i</returns>
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
 =======
         /// ??c t?t c? c?c Deck t? file JSON
         /// </summary>
@@ -65,10 +83,17 @@ namespace ASM.Data.Repositories
             try
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 // Kiểm tra file có tồn tại không
                 if (!File.Exists(_filePath))
                 {
                     // File chưa có -> trả về list rỗng
+=======
+                // Ki?m tra file c? t?n t?i kh?ng
+                if (!File.Exists(_filePath))
+                {
+                    // File ch?a c? -> tr? v? list r?ng
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
 =======
                 // Ki?m tra file c? t?n t?i kh?ng
                 if (!File.Exists(_filePath))
@@ -88,7 +113,11 @@ namespace ASM.Data.Repositories
                 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 // Chuyển đổi JSON thành List<Deck>
+=======
+                // Chuy?n ??i JSON th?nh List<Deck>
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
 =======
                 // Chuy?n ??i JSON th?nh List<Deck>
 >>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
@@ -100,8 +129,14 @@ namespace ASM.Data.Repositories
             catch (Exception ex)
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 // Ghi log lỗi (trong thực tế nên dùng logging framework)
                 Console.WriteLine($"Lỗi khi đọc file JSON: {ex.Message}");
+=======
+                // Ghi log l?i (trong th?c t? n?n d?ng logging framework)
+                Console.WriteLine($"L?i khi ??c file JSON: {ex.Message}");
+                Console.WriteLine($"???ng d?n file: {_filePath}");
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
 =======
                 // Ghi log l?i (trong th?c t? n?n d?ng logging framework)
                 Console.WriteLine($"L?i khi ??c file JSON: {ex.Message}");
@@ -113,6 +148,7 @@ namespace ASM.Data.Repositories
 
         /// <summary>
 <<<<<<< HEAD
+<<<<<<< HEAD
         /// Lưu tất cả Deck xuống file JSON (ghi đè toàn bộ)
         /// </summary>
         /// <param name="decks">Danh sách Deck cần lưu</param>
@@ -123,15 +159,28 @@ namespace ASM.Data.Repositories
         /// <param name="decks">Danh s?ch Deck c?n l?u</param>
         /// <returns>True n?u l?u th?nh c?ng, False n?u c? l?i</returns>
 >>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
+=======
+        /// L?u t?t c? Deck xu?ng file JSON (ghi ?? to�n b?)
+        /// </summary>
+        /// <param name="decks">Danh s?ch Deck c?n l?u</param>
+        /// <returns>True n?u l?u th?nh c?ng, False n?u c? l?i</returns>
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
         public bool SaveAllDecks(List<Deck> decks)
         {
             try
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 // Chuyển đổi List<Deck> thành chuỗi JSON
                 string jsonContent = JsonSerializer.Serialize(decks, _jsonOptions);
 
                 // Ghi đè xuống file
+=======
+                // Chuy?n ??i List<Deck> th?nh chu?i JSON
+                string jsonContent = JsonSerializer.Serialize(decks, _jsonOptions);
+
+                // Ghi ?? xu?ng file
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
 =======
                 // Chuy?n ??i List<Deck> th?nh chu?i JSON
                 string jsonContent = JsonSerializer.Serialize(decks, _jsonOptions);
@@ -152,6 +201,9 @@ namespace ASM.Data.Repositories
                 // Ghi log l?i
                 Console.WriteLine($"L?i khi ghi file JSON: {ex.Message}");
                 Console.WriteLine($"???ng d?n file: {_filePath}");
+<<<<<<< HEAD
+>>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
+=======
 >>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
                 return false;
             }
