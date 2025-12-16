@@ -14,14 +14,16 @@
         <Border Background="White" 
                 CornerRadius="15" 
                 Margin="25"
-                Padding="35">
+                Padding="35"
+                BorderBrush="{DynamicResource PrimaryBrush}"
+                BorderThickness="2">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="25" Opacity="0.15" ShadowDepth="5"/>
             </Border.Effect>
 
             <StackPanel VerticalAlignment="Center">
                 <!-- Logo/Title -->
-                <Border Background="#007ACC" Width="70" Height="70" CornerRadius="35" 
+                <Border Background="{DynamicResource PrimaryBrush}" Width="70" Height="70" CornerRadius="35" 
                         HorizontalAlignment="Center" Margin="0,0,0,15">
                     <TextBlock Text="FQ" FontSize="28" FontWeight="Bold" 
                                Foreground="White" HorizontalAlignment="Center" 
@@ -47,21 +49,10 @@
 
                 <!-- Button Admin -->
                 <Button x:Name="btnAdmin" 
-                        Padding="20,18"
+                        Style="{DynamicResource PrimaryButton}"
                         Margin="0,0,0,12"
-                        FontSize="15"
-                        Background="#007ACC"
-                        Foreground="White"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        HorizontalContentAlignment="Stretch"
                         Click="BtnAdmin_Click">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Border Background="#0056A3" Width="40" Height="40" CornerRadius="20" Margin="0,0,15,0">
-                            <TextBlock Text="A" FontSize="18" FontWeight="Bold" 
-                                       Foreground="White" HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"/>
-                        </Border>
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="Quản Trị Viên (Admin)" FontWeight="SemiBold" FontSize="14"/>
                             <TextBlock Text="Thêm, sửa, xóa flashcard" FontSize="11" Opacity="0.85"/>
@@ -71,47 +62,13 @@
 
                 <!-- Button Student -->
                 <Button x:Name="btnStudent" 
-                        Padding="20,18"
+                        Style="{DynamicResource SecondaryButton}"
                         Margin="0,0,0,12"
-                        FontSize="15"
-                        Background="#28A745"
-                        Foreground="White"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        HorizontalContentAlignment="Stretch"
                         Click="BtnStudent_Click">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Border Background="#1E7E34" Width="40" Height="40" CornerRadius="20" Margin="0,0,15,0">
-                            <TextBlock Text="S" FontSize="18" FontWeight="Bold" 
-                                       Foreground="White" HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"/>
-                        </Border>
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="Sinh Viên (Student)" FontWeight="SemiBold" FontSize="14"/>
                             <TextBlock Text="Học và làm quiz" FontSize="11" Opacity="0.85"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Button>
-
-                <!-- Button Guest -->
-                <Button x:Name="btnGuest" 
-                        Padding="20,18"
-                        FontSize="15"
-                        Background="#6C757D"
-                        Foreground="White"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        HorizontalContentAlignment="Stretch"
-                        Click="BtnGuest_Click">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Border Background="#545B62" Width="40" Height="40" CornerRadius="20" Margin="0,0,15,0">
-                            <TextBlock Text="G" FontSize="18" FontWeight="Bold" 
-                                       Foreground="White" HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"/>
-                        </Border>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Khách (Guest)" FontWeight="SemiBold" FontSize="14"/>
-                            <TextBlock Text="Xem và học thử" FontSize="11" Opacity="0.85"/>
                         </StackPanel>
                     </StackPanel>
                 </Button>
@@ -121,7 +78,7 @@
                            FontSize="10" 
                            HorizontalAlignment="Center" 
                            Foreground="#999" 
-                           Margin="0,25,0,0"/>
+                           Margin="0,25,0,0" Height="16"/>
             </StackPanel>
         </Border>
     </Grid>

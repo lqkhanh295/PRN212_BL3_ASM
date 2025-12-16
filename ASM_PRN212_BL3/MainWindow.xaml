@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:ASM_PRN212_BL3.ViewModels"
         mc:Ignorable="d"
         Title="Quản Lý Flashcard - Chế Độ Quản Trị" 
         Height="800" Width="1200"
@@ -420,10 +419,10 @@
                         <Button Content="⭐ Đánh Dấu" 
                                 Command="{Binding ToggleBookmarkCommand}"
                                 CommandParameter="{Binding SelectedFlashcard}"
-                                Style="{StaticResource PrimaryButtonStyle}"/>
+                                Style="{StaticResource PrimaryButton}"/>
                         <Button Content="🔄 Làm Mới" 
                                 Command="{Binding LoadDecksCommand}"
-                                Style="{StaticResource PrimaryButtonStyle}"/>
+                                Style="{StaticResource PrimaryButton}"/>
                     </StackPanel>
                 </Grid>
             </Border>

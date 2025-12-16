@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using ASM_PRN212_BL3.ViewModels;
 using ASM_PRN212_BL3.Views;
 using ASM_PRN212_BL3.ViewModels;
 
@@ -22,8 +22,9 @@ namespace ASM_PRN212_BL3
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
             var loginWindow = new LoginWindow();
+            loginWindow.Owner = this; // Ensure resource context inheritance
             loginWindow.Show();
-            this.Close();
+            this.Hide(); // Use Hide instead of Close to keep resource context alive
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -32,3 +33,4 @@ namespace ASM_PRN212_BL3
         }
     }
 }
+

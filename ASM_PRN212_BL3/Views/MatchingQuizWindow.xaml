@@ -20,8 +20,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- ================= HEADER ================= -->
-        <Border Grid.Row="0" Background="White" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+        <!-- HEADER -->
+        <Border Grid.Row="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,20" BorderBrush="{DynamicResource PrimaryBrush}" BorderThickness="2">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="20" Opacity="0.12" ShadowDepth="4"/>
             </Border.Effect>
