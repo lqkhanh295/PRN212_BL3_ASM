@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <!-- HEADER -->
-        <Border Grid.Row="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,20">
+        <Border Grid.Row="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,0,20" BorderBrush="{DynamicResource PrimaryBrush}" BorderThickness="2">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="20" Opacity="0.1" ShadowDepth="0"/>
             </Border.Effect>
@@ -37,41 +37,16 @@
 
                 <TextBlock Grid.Column="1" x:Name="txtScore" Text="1.5" 
                            FontSize="32" FontWeight="Bold" 
-                           Foreground="#3498DB"
+                           Foreground="{DynamicResource PrimaryBrush}"
                            VerticalAlignment="Center"
                            Margin="0,0,20,0"/>
 
                 <Button x:Name="btnBack" Grid.Column="2" 
                         Content="?? Quay lai" 
-                        Padding="20,10"
+                        Style="{DynamicResource PrimaryButton}"
                         Background="#95A5A6"
                         Foreground="White"
-                        BorderThickness="0"
-                        FontSize="13"
-                        FontWeight="SemiBold"
-                        Cursor="Hand"
-                        Click="BtnBack_Click">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" 
-                                                CornerRadius="6" 
-                                                Padding="{TemplateBinding Padding}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#7F8C8D"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                        Click="BtnBack_Click"/>
             </Grid>
         </Border>
 
@@ -83,7 +58,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- LEFT: Danh sach Deck -->
-            <Border Grid.Column="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,15,0">
+            <Border Grid.Column="0" Background="White" CornerRadius="10" Padding="20" Margin="0,0,15,0" BorderBrush="{DynamicResource PrimaryBrush}" BorderThickness="1.5">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="20" Opacity="0.1" ShadowDepth="0"/>
                 </Border.Effect>
@@ -145,45 +120,14 @@
 
                     <Button Grid.Row="2" x:Name="btnStartQuiz" 
                             Content="?? Bat dau ghep the" 
-                            Padding="15,12"
-                            Background="#3498DB"
-                            Foreground="White"
-                            BorderThickness="0"
-                            FontSize="13"
-                            FontWeight="SemiBold"
-                            Cursor="Hand"
-                            Margin="0,15,0,0"
+                            Style="{DynamicResource PrimaryButton}"
                             Click="BtnStartQuiz_Click"
-                            IsEnabled="False">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}" 
-                                                    CornerRadius="6" 
-                                                    Padding="{TemplateBinding Padding}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#2980B9"/>
-                                    </Trigger>
-                                    <Trigger Property="IsEnabled" Value="False">
-                                        <Setter Property="Opacity" Value="0.5"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                            IsEnabled="False"/>
                 </Grid>
             </Border>
 
             <!-- RIGHT: Matching Grid -->
-            <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="30" Margin="15,0,0,0">
+            <Border Grid.Column="1" Background="White" CornerRadius="10" Padding="30" Margin="15,0,0,0" BorderBrush="{DynamicResource PrimaryBrush}" BorderThickness="1.5">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="20" Opacity="0.1" ShadowDepth="0"/>
                 </Border.Effect>
@@ -202,27 +146,8 @@
                                        Foreground="#34495E"/>
                             <ProgressBar x:Name="progressBar" Height="6" Margin="0,10,0,0"
                                          Background="#ECF0F1" 
-                                         Foreground="#27AE60"
-                                         BorderThickness="0">
-                                <ProgressBar.Style>
-                                    <Style TargetType="ProgressBar">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ProgressBar">
-                                                    <Grid>
-                                                        <Border Background="{TemplateBinding Background}" 
-                                                                CornerRadius="3"/>
-                                                        <Border Background="{TemplateBinding Foreground}" 
-                                                                CornerRadius="3"
-                                                                Width="{TemplateBinding Value}"
-                                                                HorizontalAlignment="Left"/>
-                                                    </Grid>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ProgressBar.Style>
-                            </ProgressBar>
+                                         Foreground="{DynamicResource PrimaryBrush}"
+                                         BorderThickness="0"/>
                         </StackPanel>
 
                         <!-- Matching Cards Container -->
@@ -237,27 +162,43 @@
                                     <Border Margin="8" 
                                             Background="{Binding Background}" 
                                             CornerRadius="12" 
-                                            Padding="20"
+                                            Padding="15"
                                             Cursor="Hand"
                                             MouseLeftButtonDown="Card_Click"
                                             Tag="{Binding Id}">
                                         <Border.Effect>
                                             <DropShadowEffect BlurRadius="15" Opacity="0.15" ShadowDepth="3"/>
                                         </Border.Effect>
-                                        <StackPanel VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Label}" 
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!-- Label -->
+                                            <TextBlock Grid.Row="0"
+                                                       Text="{Binding Label}" 
                                                        FontSize="11" 
                                                        Foreground="#95A5A6"
                                                        FontWeight="SemiBold"
                                                        HorizontalAlignment="Center"
                                                        Margin="0,0,0,10"/>
-                                            <TextBlock Text="{Binding Content}" 
-                                                       FontSize="16" 
-                                                       FontWeight="SemiBold"
-                                                       TextWrapping="Wrap"
-                                                       TextAlignment="Center"
-                                                       Foreground="#2C3E50"/>
-                                        </StackPanel>
+
+                                            <!-- Content with ScrollViewer -->
+                                            <ScrollViewer Grid.Row="1"
+                                                          VerticalScrollBarVisibility="Auto"
+                                                          HorizontalScrollBarVisibility="Disabled"
+                                                          MaxHeight="120">
+                                                <TextBlock Text="{Binding Content}" 
+                                                           FontSize="14" 
+                                                           FontWeight="SemiBold"
+                                                           TextWrapping="Wrap"
+                                                           TextAlignment="Center"
+                                                           Foreground="#2C3E50"
+                                                           LineHeight="20"
+                                                           VerticalAlignment="Center"/>
+                                            </ScrollViewer>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -279,7 +220,7 @@
 
         <!-- FOOTER: Result -->
         <Border Grid.Row="2" x:Name="pnlResult" 
-                Background="#27AE60" 
+                Background="{DynamicResource SecondaryBrush}" 
                 CornerRadius="10" 
                 Padding="20" 
                 Margin="0,20,0,0"
@@ -298,46 +239,19 @@
                                Text="Hoan thanh! Diem: 0" 
                                FontSize="18" 
                                FontWeight="Bold" 
-                               Foreground="White"/>
+                               Foreground="#26169E"/>
                     <TextBlock x:Name="txtResultDetail" 
                                Text="" 
                                FontSize="13" 
-                               Foreground="#E8F8F5" 
+                               Foreground="#26169E" 
                                Margin="0,5,0,0"/>
                 </StackPanel>
 
                 <Button Grid.Column="1" 
                         x:Name="btnRestart" 
                         Content="?? Lam lai" 
-                        Padding="20,10"
-                        Background="White" 
-                        Foreground="#27AE60"
-                        FontSize="13"
-                        FontWeight="Bold"
-                        BorderThickness="0" 
-                        Cursor="Hand"
-                        Click="BtnRestart_Click">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" 
-                                                CornerRadius="6" 
-                                                Padding="{TemplateBinding Padding}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#ECF0F1"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                        Style="{DynamicResource SecondaryButton}"
+                        Click="BtnRestart_Click"/>
             </Grid>
         </Border>
     </Grid>

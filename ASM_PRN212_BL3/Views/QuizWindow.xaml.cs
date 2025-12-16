@@ -166,13 +166,6 @@ namespace ASM_PRN212_BL3.Views
             btnShuffle.IsEnabled = hasCards;
         }
 
-        /// <summary>
-<<<<<<< HEAD
-        /// Lật thẻ (click vào thẻ)
-=======
-        /// Lat the (click vao the) voi animation
->>>>>>> 5b835f85684f5e91133de1435d46ffa8ac8bc8b7
-        /// </summary>
         private void CardBorder_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (_currentCards.Count == 0) return;

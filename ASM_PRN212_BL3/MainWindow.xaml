@@ -3,48 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:ASM_PRN212_BL3.ViewModels"
         mc:Ignorable="d"
-        Title="Quản Lý Flashcard - Chế Độ Quản Trị" 
-        Height="650" Width="1050"
-        WindowStartupLocation="CenterScreen"
-        Background="#F0F0F0">
-
-    <Window.DataContext>
-        <vm:MainViewModel />
-    </Window.DataContext>
-
-    <Window.Resources>
-        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#007ACC"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="15,8"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="FontSize" Value="13"/>
-        </Style>
-
-        <Style x:Key="DangerButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#DC3545"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="15,8"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="FontSize" Value="13"/>
-        </Style>
-
-        <Style x:Key="SuccessButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#28A745"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="15,8"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="FontSize" Value="13"/>
-        </Style>
-    </Window.Resources>
+        Title="MainWindow" Height="600" Width="900"
+        Background="#F5F7FA">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -107,7 +68,7 @@
                     <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
                         <Button Content="➕ Tạo Deck Mới"
                                 Command="{Binding CreateDeckCommand}"
-                                Style="{StaticResource PrimaryButtonStyle}"
+                                Style="{StaticResource PrimaryButton}"
                                 Margin="0,0,10,0"/>
 
                         <Button Content="⬆️ Import từ Excel"
@@ -239,10 +200,10 @@
                         <Button Content="⭐ Đánh Dấu" 
                                 Command="{Binding ToggleBookmarkCommand}"
                                 CommandParameter="{Binding SelectedFlashcard}"
-                                Style="{StaticResource PrimaryButtonStyle}"/>
+                                Style="{StaticResource PrimaryButton}"/>
                         <Button Content="🔄 Làm Mới" 
                                 Command="{Binding LoadDecksCommand}"
-                                Style="{StaticResource PrimaryButtonStyle}"/>
+                                Style="{StaticResource PrimaryButton}"/>
                     </StackPanel>
                 </Grid>
             </Border>
