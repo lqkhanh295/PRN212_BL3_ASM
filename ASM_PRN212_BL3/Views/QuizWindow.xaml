@@ -303,8 +303,7 @@
                                                    HorizontalAlignment="Center" 
                                                    Margin="0,30,0,0"
                                                    FontStyle="Italic"/>
-                                    </Grid>
-
+                                    </StackPanel>
                                     <TextBlock x:Name="txtBookmark" 
                                                Text="★" 
                                                FontSize="36"
@@ -354,9 +353,9 @@
                                     Click="BtnNext_Click"/>
                         </StackPanel>
                     </StackPanel>
-                </Grid>
+                </Grid> <!-- Đóng Grid trong Border Grid.Column="1" -->
             </Border>
-        </Grid>
+        </Grid> <!-- Đóng Grid Grid.Row="1" -->
 
         <Border Grid.Row="2" x:Name="pnlResult" 
                 Background="#1ABC9C" 

@@ -1,6 +1,6 @@
-﻿using ASM_PRN212_BL3.ViewModels;
-using ASM_PRN212_BL3.Views;
+﻿using System.Windows; // Thêm dòng này để nhận diện Window, RoutedEventArgs
 using ASM_PRN212_BL3.ViewModels;
+using ASM_PRN212_BL3.Views;
 
 namespace ASM_PRN212_BL3
 {
