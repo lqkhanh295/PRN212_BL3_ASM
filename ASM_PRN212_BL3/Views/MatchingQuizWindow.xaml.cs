@@ -29,19 +29,22 @@ namespace ASM_PRN212_BL3.Views
         private Deck? _selectedDeck;
         private List<MatchingCard> _matchingCards = new();
         private MatchingCard? _firstSelectedCard;
-        private int _matchedPairs =0;
+        private int _matchedPairs = 0;
         private DateTime _startTime;
-        private int _attempts =0;
+        private int _attempts = 0;
 
         // Timer ??m ng??c
         private DispatcherTimer? _countdownTimer;
-        private int _remainingSeconds =60; //60s m?c ??nh
+        private int _remainingSeconds = 60; //60s m?c ??nh
 
         public MatchingQuizWindow()
         {
             try
             {
                 InitializeComponent();
+                // Ensure window state is Normal on open
+                this.WindowState = WindowState.Normal;
+                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 _deckService = new DeckService();
                 LoadDecks();
             }
@@ -54,18 +57,9 @@ namespace ASM_PRN212_BL3.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // ??t chu?i ti?ng Vi?t có d?u và emoji t?i runtime ?? tránh l?i encoding trong XAML
-            txtTitle.Text = "Ghép Th?";
-            txtDeckName.Text = "Ch?n b? th? ?? b?t ??u";
+            // Không override các text ?ã ??nh ngh?a trong XAML ?? tránh v?n ?? mã hoá
+            // N?u c?n c?p nh?t ??ng, hãy gán các chu?i Unicode ?úng tr?c ti?p
             txtTimer.Text = "60s";
-            txtInitialMessage.Text = "Vui lòng ch?n b? th? và b?m 'B?t ??u'";
-            btnStartQuiz.Content = "?? B?t ??u Ghép Th?";
-            btnRestart.Content = "Làm L?i";
-            btnBack.Content = "? Quay L?i";
-
-            // Icons
-            headerIcon.Text = "??";
-            listHeaderIcon.Text = "??";
         }
 
         /// <summary>
@@ -79,14 +73,14 @@ namespace ASM_PRN212_BL3.Views
 
         private void StartCountdown()
         {
-            _remainingSeconds =60;
+            _remainingSeconds = 60;
             txtTimer.Text = $"{_remainingSeconds}s";
             _countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _countdownTimer.Tick += (s, e) =>
             {
                 _remainingSeconds--;
                 txtTimer.Text = $"{_remainingSeconds}s";
-                if (_remainingSeconds <=0)
+                if (_remainingSeconds <= 0)
                 {
                     _countdownTimer.Stop();
                     // Khi h?t gi?, ch?m ?i?m ngay
@@ -106,26 +100,36 @@ namespace ASM_PRN212_BL3.Views
         }
 
         /// <summary>
-        /// Xu ly khi chon deck
+        /// X? lý khi ch?n deck
         /// </summary>
         private void LstDecks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstDecks.SelectedItem is Deck selectedDeck)
             {
                 _selectedDeck = selectedDeck;
-                txtDeckName.Text = $"B? th?: {selectedDeck.Name} ({selectedDeck.CardCount} th?)";
-                btnStartQuiz.IsEnabled = selectedDeck.CardCount >=4; // C?n ít nh?t4 th?
+                // Update Runs defined in XAML to preserve Vietnamese diacritics
+                try
+                {
+                    runDeckInfo.Text = selectedDeck.Name ?? string.Empty;
+                    runDeckCount.Text = selectedDeck.CardCount.ToString();
+                }
+                catch
+                {
+                    // If Runs not found for some reason, set plain Text as fallback
+                    txtDeckName.Text = $"B? th?: {selectedDeck.Name} ({selectedDeck.CardCount} th?)";
+                }
+                btnStartQuiz.IsEnabled = selectedDeck.CardCount >= 4; // C?n ít nh?t 4 th?
             }
         }
 
         /// <summary>
-        /// Bat dau quiz
+        /// B?t ??u quiz
         /// </summary>
         private void BtnStartQuiz_Click(object sender, RoutedEventArgs e)
         {
-            if (_selectedDeck == null || _selectedDeck.Flashcards == null || _selectedDeck.Flashcards.Count <4)
+            if (_selectedDeck == null || _selectedDeck.Flashcards == null || _selectedDeck.Flashcards.Count < 4)
             {
-                MessageBox.Show("B? th? ph?i có ít nh?t4 th?!", "Thông báo",
+                MessageBox.Show("B? th? ph?i có ít nh?t 4 th?!", "Thông báo",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
@@ -140,11 +144,11 @@ namespace ASM_PRN212_BL3.Views
         {
             if (_selectedDeck?.Flashcards == null) return;
 
-            // Reset trang thai
+            // Reset tr?ng thái
             _matchingCards.Clear();
             _firstSelectedCard = null;
-            _matchedPairs =0;
-            _attempts =0;
+            _matchedPairs = 0;
+            _attempts = 0;
             _startTime = DateTime.Now;
             pnlResult.Visibility = Visibility.Collapsed;
             txtInitialMessage.Visibility = Visibility.Collapsed;
@@ -156,7 +160,7 @@ namespace ASM_PRN212_BL3.Views
                 .Take(6)
                 .ToList();
 
-            int cardId =1;
+            int cardId = 1;
 
             // Tao cac the ghep: Term va Definition
             foreach (var flashcard in selectedFlashcards)
@@ -168,13 +172,13 @@ namespace ASM_PRN212_BL3.Views
                     Label = $"Q.{cardId}",
                     Content = flashcard.Term,
                     Background = "#E3F2FD",
-                    PairId = cardId +100 // Ghep voi the definition
+                    PairId = cardId + 100 // Ghep voi the definition
                 });
 
                 // The definition (dap an)
                 _matchingCards.Add(new MatchingCard
                 {
-                    Id = cardId +100,
+                    Id = cardId + 100,
                     Label = "", // Khong hien thi label cho dap an
                     Content = flashcard.Definition,
                     Background = "#FFF3E0",
@@ -193,7 +197,7 @@ namespace ASM_PRN212_BL3.Views
             // Cap nhat progress
             UpdateProgress();
 
-            // B?t ??u ??m ng??c60s
+            // B?t ??u ??m ng??c 60s
             StartCountdown();
         }
 
@@ -239,7 +243,7 @@ namespace ASM_PRN212_BL3.Views
                 _firstSelectedCard = null;
 
                 // Kiem tra xem da ghep het chua
-                if (_matchedPairs == _matchingCards.Count /2)
+                if (_matchedPairs == _matchingCards.Count / 2)
                 {
                     StopCountdown();
                     ShowResult();
@@ -372,7 +376,7 @@ namespace ASM_PRN212_BL3.Views
         /// </summary>
         private void UpdateProgress()
         {
-            int total = _matchingCards.Count /2;
+            int total = _matchingCards.Count / 2;
             txtProgress.Text = $"Ti?n ??: {_matchedPairs} / {total}";
             progressBar.Maximum = total;
             progressBar.Value = _matchedPairs;
@@ -398,15 +402,15 @@ namespace ASM_PRN212_BL3.Views
         /// </summary>
         private double CalculateScore(TimeSpan elapsed, int attempts)
         {
-            int totalPairs = _matchingCards.Count /2;
-            double baseScore =10.0;
+            int totalPairs = _matchingCards.Count / 2;
+            double baseScore = 10.0;
 
             // Tru diem theo thoi gian (toi da -3 diem)
-            double timePenalty = Math.Min(elapsed.TotalSeconds /10.0,3.0);
+            double timePenalty = Math.Min(elapsed.TotalSeconds / 10.0, 3.0);
 
             // Tru diem theo so lan sai (moi lan sai = attempts - totalPairs)
             int wrongAttempts = attempts - totalPairs;
-            double attemptPenalty = Math.Max(0, wrongAttempts) *0.5;
+            double attemptPenalty = Math.Max(0, wrongAttempts) * 0.5;
 
             double finalScore = baseScore - timePenalty - attemptPenalty;
             return Math.Max(0, finalScore);

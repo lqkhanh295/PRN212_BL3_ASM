@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "Id": 1,
     "Name": "Tiếng Anh cơ bản",
@@ -120,73 +120,5 @@
     ],
     "CreatedDate": "2025-12-16T18:31:33.3226312+07:00",
     "CardCount": 1
-  },
-  {
-    "Id": 5,
-    "Name": "Test OOP",
-    "Flashcards": [
-      {
-        "Id": 1,
-        "Term": "Term (Thuật ngữ)",
-        "Definition": "Definition (Định nghĩa)",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 2,
-        "Term": "Abstraction",
-        "Definition": "Quá trình đơn giản hóa bằng cách chỉ hiển thị những chi tiết cần thiết và ẩn đi sự phức tạp bên trong.",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 3,
-        "Term": "Encapsulation",
-        "Definition": "Cơ chế đóng gói dữ liệu và phương thức xử lý dữ liệu đó thành một đơn vị duy nhất (object), giúp bảo vệ dữ liệu.",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 4,
-        "Term": "Polymorphism",
-        "Definition": "Khả năng của một đối tượng có thể mang nhiều hình thái, cho phép cùng một tên phương thức được sử dụng với các đối tượng khác nhau.",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 5,
-        "Term": "Inheritance",
-        "Definition": "Cơ chế cho phép một lớp (con) kế thừa các thuộc tính và hành vi từ một lớp khác (cha), tái sử dụng code.",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 6,
-        "Term": "Async/Await",
-        "Definition": "Cú pháp trong C# cho phép thực hiện các tác vụ I/O mà không chặn luồng chính (main thread), giúp cải thiện hiệu suất.",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 7,
-        "Term": "ViewModel",
-        "Definition": "Lớp trong mô hình MVVM, chịu trách nhiệm xử lý logic nghiệp vụ và cung cấp dữ liệu cho View (Giao diện người dùng).",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 8,
-        "Term": "Data Binding",
-        "Definition": "Cơ chế tự động đồng bộ hóa dữ liệu giữa View (XAML) và ViewModel (C# property).",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 9,
-        "Term": "LINQ",
-        "Definition": "Language Integrated Query. Một bộ cú pháp cho phép truy vấn dữ liệu từ các nguồn khác nhau (như Collections, SQL DB, XML).",
-        "IsBookmarked": false
-      },
-      {
-        "Id": 10,
-        "Term": "Tuple",
-        "Definition": "Một cấu trúc dữ liệu đơn giản cho phép lưu trữ nhiều giá trị thuộc các kiểu dữ liệu khác nhau mà không cần tạo class riêng.",
-        "IsBookmarked": false
-      }
-    ],
-    "CreatedDate": "2025-12-16T22:14:00.6095822+07:00",
-    "CardCount": 10
   }
 ]

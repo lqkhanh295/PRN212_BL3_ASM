@@ -114,11 +114,6 @@
 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
-                        <Border Background="#4A90E2" Width="50" Height="50" CornerRadius="10" 
-                                Margin="0,0,15,0" VerticalAlignment="Center">
-                            <TextBlock Text="📇" FontSize="28" HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"/>
-                        </Border>
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="Flashcard Manager" 
                                        FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -129,7 +124,7 @@
                 </StackPanel>
 
                 <Button x:Name="btnLogout" Grid.Column="1" 
-                        Content="🚪 Đăng Xuất" 
+                        Content="Đăng Xuất" 
                         Style="{StaticResource DangerButtonStyle}"
                         Click="BtnLogout_Click"
                         VerticalAlignment="Center"/>
@@ -158,11 +153,6 @@
 
                     <!-- Tiêu đề -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border Background="#E8F4F8" Width="40" Height="40" CornerRadius="8" 
-                                Margin="0,0,12,0">
-                            <TextBlock Text="📚" FontSize="20" HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"/>
-                        </Border>
                         <TextBlock Text="Danh Sách Bộ Thẻ" 
                                    FontSize="18" FontWeight="Bold" 
                                    Foreground="#2C3E50" VerticalAlignment="Center"/>
@@ -253,7 +243,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <Button Grid.Row="4" Content="🗑️ Xóa Bộ Thẻ Đã Chọn" 
+                    <Button Grid.Row="4" Content="Xóa Bộ Thẻ Đã Chọn" 
                             Command="{Binding DeleteDeckCommand}"
                             Style="{StaticResource DangerButtonStyle}"
                             HorizontalAlignment="Stretch" Margin="0,20,0,0"/>
@@ -275,11 +265,6 @@
 
                     <!-- Tiêu đề -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
-                        <Border Background="#FFF4E6" Width="40" Height="40" CornerRadius="8" 
-                                Margin="0,0,12,0">
-                            <TextBlock Text="🎴" FontSize="20" HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center"/>
-                        </Border>
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock FontSize="18" FontWeight="Bold" Foreground="#2C3E50">
                                 <Run Text="Flashcards - "/>
@@ -411,19 +396,22 @@
                         </ListView.View>
                     </ListView>
 
-                    <!-- Buttons quản lý flashcard -->
-                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,15,0,0">
-                        <Button Content="🗑️ Xóa Thẻ" 
+                    <!-- Buttons quản lý flashcard - evenly spaced -->
+                    <UniformGrid Grid.Row="3" Columns="3" Margin="0,15,0,0" HorizontalAlignment="Stretch">
+                        <Button Content="Xóa Thẻ" 
                                 Command="{Binding DeleteFlashcardCommand}"
-                                Style="{StaticResource DangerButtonStyle}"/>
-                        <Button Content="⭐ Đánh Dấu" 
+                                Style="{StaticResource DangerButtonStyle}"
+                                Margin="0,0,8,0" HorizontalAlignment="Stretch"/>
+                        <Button Content="Đánh Dấu" 
                                 Command="{Binding ToggleBookmarkCommand}"
                                 CommandParameter="{Binding SelectedFlashcard}"
-                                Style="{StaticResource PrimaryButton}"/>
-                        <Button Content="🔄 Làm Mới" 
+                                Style="{StaticResource PrimaryButton}"
+                                Margin="4,0,4,0" HorizontalAlignment="Stretch"/>
+                        <Button Content="Làm Mới" 
                                 Command="{Binding LoadDecksCommand}"
-                                Style="{StaticResource PrimaryButton}"/>
-                    </StackPanel>
+                                Style="{StaticResource PrimaryButton}"
+                                Margin="8,0,0,0" HorizontalAlignment="Stretch"/>
+                    </UniformGrid>
                 </Grid>
             </Border>
         </Grid>
@@ -442,7 +430,7 @@
                            FontWeight="Medium"/>
                 <Border Grid.Column="1" Background="#2ECC71" 
                         Padding="12,6" CornerRadius="6">
-                    <TextBlock Text="🔐 Chế Độ Quản Trị" 
+                    <TextBlock Text="Admin Mode" 
                                Foreground="White" FontSize="12" FontWeight="Bold"/>
                 </Border>
             </Grid>

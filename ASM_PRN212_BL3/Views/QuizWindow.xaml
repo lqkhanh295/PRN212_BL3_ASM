@@ -7,7 +7,10 @@
         Title="Học Flashcard - Chế Độ Quiz" 
         Height="720" Width="1000"
         WindowStartupLocation="CenterScreen"
-        Background="#F4F7F9">
+        Background="#F4F7F9"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType">
 
     <Window.Resources>
         <Style x:Key="BaseButtonStyle" TargetType="Button">
@@ -264,57 +267,61 @@
                         </ProgressBar>
                     </StackPanel>
 
-                    <Grid Grid.Row="1">
-                        <Viewbox Stretch="Uniform" VerticalAlignment="Center">
-                            <Border x:Name="cardBorder"
-                                    Width="550" Height="350"
-                                    Background="#FAFBFC" 
-                                    CornerRadius="25" 
-                                    Cursor="Hand"
-                                    MouseLeftButtonDown="CardBorder_Click"
-                                    Padding="50">
-                                <Border.Effect>
-                                    <DropShadowEffect BlurRadius="40" Opacity="0.25" ShadowDepth="8" Color="#3498DB"/>
-                                </Border.Effect>
-                                <Border.RenderTransform>
-                                    <ScaleTransform x:Name="CardScale" ScaleX="1" ScaleY="1"/>
-                                </Border.RenderTransform>
-                                <Border.RenderTransformOrigin>0.5,0.5</Border.RenderTransformOrigin>
+                    <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <!-- Removed Viewbox to avoid text blurriness when scaled -->
+                        <Border x:Name="cardBorder"
+                                Width="550" Height="350"
+                                Background="#FAFBFC"
+                                CornerRadius="25"
+                                Cursor="Hand"
+                                MouseLeftButtonDown="CardBorder_Click"
+                                Padding="50"
+                                SnapsToDevicePixels="True"
+                                UseLayoutRounding="True">
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="CardScale" ScaleX="1" ScaleY="1" />
+                            </Border.RenderTransform>
+                            <Border.RenderTransformOrigin>0.5,0.5</Border.RenderTransformOrigin>
 
-                                <Grid>
-                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock x:Name="txtCardLabel" Text="THUẬT NGỮ" 
-                                                   FontSize="12" 
-                                                   Foreground="#95A5A6" 
-                                                   FontWeight="SemiBold"
-                                                   HorizontalAlignment="Center" 
-                                                   Margin="0,0,0,25"/>
-                                        <TextBlock x:Name="txtCardContent" 
-                                                   Text="Chọn bộ thẻ để bắt đầu" 
-                                                   FontSize="42" 
-                                                   FontWeight="ExtraBold" 
-                                                   TextWrapping="Wrap" 
-                                                   TextAlignment="Center"
-                                                   Foreground="#2C3E50"
-                                                   MaxWidth="450"/>
-                                        <TextBlock Text="(Click vào thẻ để lật)" 
-                                                   FontSize="13" 
-                                                   Foreground="#BDC3C7" 
-                                                   HorizontalAlignment="Center" 
-                                                   Margin="0,30,0,0"
-                                                   FontStyle="Italic"/>
-                                    </StackPanel>
-                                    <TextBlock x:Name="txtBookmark" 
-                                               Text="★" 
-                                               FontSize="36"
-                                               Foreground="#F39C12"
-                                               HorizontalAlignment="Right" 
-                                               VerticalAlignment="Top"
-                                               Margin="0,-10,-10,0" 
-                                               Visibility="Collapsed"/>
-                                </Grid>
-                            </Border>
-                        </Viewbox>
+                            <Grid>
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock x:Name="txtCardLabel" Text="THUẬT NGỮ"
+                                               FontSize="12"
+                                               Foreground="#6C7A89"
+                                               FontWeight="SemiBold"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,0,0,25"
+                                               TextOptions.TextFormattingMode="Display"
+                                               TextOptions.TextRenderingMode="ClearType"/>
+                                    <TextBlock x:Name="txtCardContent"
+                                               Text="Chọn bộ thẻ để bắt đầu"
+                                               FontSize="42"
+                                               FontWeight="ExtraBold"
+                                               TextWrapping="Wrap"
+                                               TextAlignment="Center"
+                                               Foreground="#1F2D3D"
+                                               MaxWidth="450"
+                                               TextOptions.TextFormattingMode="Display"
+                                               TextOptions.TextRenderingMode="ClearType"/>
+                                    <TextBlock Text="(Click vào thẻ để lật)"
+                                               FontSize="13"
+                                               Foreground="#95A5A6"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,30,0,0"
+                                               FontStyle="Italic"
+                                               TextOptions.TextFormattingMode="Display"
+                                               TextOptions.TextRenderingMode="ClearType"/>
+                                </StackPanel>
+                                <TextBlock x:Name="txtBookmark"
+                                           Text="★"
+                                           FontSize="36"
+                                           Foreground="#F39C12"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Top"
+                                           Margin="0,-10,-10,0"
+                                           Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
                     </Grid>
 
                     <StackPanel Grid.Row="2" Margin="0,40,0,0">
@@ -338,17 +345,17 @@
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Center">
                             <Button x:Name="btnPrevious" 
-                                    Content="⬅ Trước" 
+                                    Content="Trước" 
                                     Style="{StaticResource NavigationButtonStyle}"
                                     Click="BtnPrevious_Click"/>
 
                             <Button x:Name="btnShuffle" 
-                                    Content="🔀 Trộn Thẻ" 
+                                    Content="Trộn Thẻ" 
                                     Style="{StaticResource ShuffleButtonStyle}"
                                     Click="BtnShuffle_Click"/>
 
                             <Button x:Name="btnNext" 
-                                    Content="Sau ➡" 
+                                    Content="Sau" 
                                     Style="{StaticResource NavigationButtonStyle}"
                                     Click="BtnNext_Click"/>
                         </StackPanel>

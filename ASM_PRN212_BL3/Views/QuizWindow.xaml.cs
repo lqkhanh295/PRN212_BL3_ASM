@@ -28,6 +28,9 @@ namespace ASM_PRN212_BL3.Views
         public QuizWindow(User? user = null)
         {
             InitializeComponent();
+            // Force window to open in normal state and centered (prevent unexpected fullscreen)
+            this.WindowState = WindowState.Normal;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _deckService = new DeckService();
             _currentUser = user;
 
