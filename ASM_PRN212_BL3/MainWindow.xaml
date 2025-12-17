@@ -123,11 +123,19 @@
                     </StackPanel>
                 </StackPanel>
 
-                <Button x:Name="btnLogout" Grid.Column="1" 
-                        Content="Đăng Xuất" 
-                        Style="{StaticResource DangerButtonStyle}"
-                        Click="BtnLogout_Click"
-                        VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Import Excel button for Admin -->
+                    <Button Content="Import Excel" 
+                            Command="{Binding ImportDeckCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+
+                    <Button x:Name="btnLogout" 
+                            Content="Đăng Xuất" 
+                            Style="{StaticResource DangerButtonStyle}"
+                            Click="BtnLogout_Click"
+                            VerticalAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </Border>
 
@@ -405,11 +413,11 @@
                         <Button Content="Đánh Dấu" 
                                 Command="{Binding ToggleBookmarkCommand}"
                                 CommandParameter="{Binding SelectedFlashcard}"
-                                Style="{StaticResource PrimaryButton}"
+                                Style="{StaticResource PrimaryButtonStyle}"
                                 Margin="4,0,4,0" HorizontalAlignment="Stretch"/>
                         <Button Content="Làm Mới" 
                                 Command="{Binding LoadDecksCommand}"
-                                Style="{StaticResource PrimaryButton}"
+                                Style="{StaticResource PrimaryButtonStyle}"
                                 Margin="8,0,0,0" HorizontalAlignment="Stretch"/>
                     </UniformGrid>
                 </Grid>

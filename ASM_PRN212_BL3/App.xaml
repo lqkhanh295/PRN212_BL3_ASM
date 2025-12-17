@@ -10,32 +10,38 @@
         <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
         <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
 
-        <!-- Global Font Style -->
+        <!-- Global Font Style: use Segoe UI which supports Vietnamese broadly -->
         <Style TargetType="{x:Type Window}">
-            <Setter Property="FontFamily" Value="Be Vietnam Pro"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
         
         <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="FontFamily" Value="Be Vietnam Pro"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
         
         <Style TargetType="{x:Type Button}">
-            <Setter Property="FontFamily" Value="Be Vietnam Pro"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
         
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="FontFamily" Value="Be Vietnam Pro"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
         
         <Style TargetType="{x:Type Label}">
-            <Setter Property="FontFamily" Value="Be Vietnam Pro"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+
+        <!-- Improve text rendering globally -->
+        <Style TargetType="FrameworkElement">
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
         </Style>
 
         <!-- Button style (primary) -->
         <Style TargetType="Button" x:Key="PrimaryButton">
             <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontFamily" Value="Be Vietnam Pro"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Margin" Value="0,0,0,8"/>

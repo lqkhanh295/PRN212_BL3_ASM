@@ -17,7 +17,7 @@ namespace ASM_PRN212_BL3.Views
         public string Content { get; set; } = string.Empty;
         public string Background { get; set; } = "#FAFBFC";
         public bool IsMatched { get; set; }
-        public int PairId { get; set; } // ID c?a th? ghép ?ôi
+        public int PairId { get; set; } // ID có th? ghép ?ôi
     }
 
     /// <summary>
@@ -35,7 +35,6 @@ namespace ASM_PRN212_BL3.Views
 
         // Timer ??m ng??c
         private DispatcherTimer? _countdownTimer;
-        private int _remainingSeconds = 60; //60s m?c ??nh
 
         public MatchingQuizWindow()
         {
@@ -59,7 +58,7 @@ namespace ASM_PRN212_BL3.Views
         {
             // Không override các text ?ã ??nh ngh?a trong XAML ?? tránh v?n ?? mã hoá
             // N?u c?n c?p nh?t ??ng, hãy gán các chu?i Unicode ?úng tr?c ti?p
-            txtTimer.Text = "60s";
+            
         }
 
         /// <summary>
@@ -71,25 +70,7 @@ namespace ASM_PRN212_BL3.Views
             lstDecks.ItemsSource = decks;
         }
 
-        private void StartCountdown()
-        {
-            _remainingSeconds = 60;
-            txtTimer.Text = $"{_remainingSeconds}s";
-            _countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _countdownTimer.Tick += (s, e) =>
-            {
-                _remainingSeconds--;
-                txtTimer.Text = $"{_remainingSeconds}s";
-                if (_remainingSeconds <= 0)
-                {
-                    _countdownTimer.Stop();
-                    // Khi h?t gi?, ch?m ?i?m ngay
-                    ShowResult();
-                }
-            };
-            _countdownTimer.Start();
-        }
-
+       
         private void StopCountdown()
         {
             if (_countdownTimer != null)
@@ -198,7 +179,7 @@ namespace ASM_PRN212_BL3.Views
             UpdateProgress();
 
             // B?t ??u ??m ng??c 60s
-            StartCountdown();
+           
         }
 
         /// <summary>
@@ -377,8 +358,7 @@ namespace ASM_PRN212_BL3.Views
         private void UpdateProgress()
         {
             int total = _matchingCards.Count / 2;
-            txtProgress.Text = $"Ti?n ??: {_matchedPairs} / {total}";
-            progressBar.Maximum = total;
+            progressBar.Maximum = Math.Max(1, total);
             progressBar.Value = _matchedPairs;
         }
 

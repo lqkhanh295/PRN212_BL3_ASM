@@ -30,18 +30,10 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Tiêu đề -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <Border Width="50" Height="50" CornerRadius="10" Margin="0,0,15,0" Background="#9B59B6">
-                        <Grid>
-                            <!-- Use numeric entity and emoji font only for the icon -->
-                            <TextBlock x:Name="headerIcon" Text="&#x1F9E9;" FontFamily="Segoe UI Emoji" FontSize="26"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </Border>
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock x:Name="txtTitle" Text="Ghép thẻ" FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
                         <!-- Keep Vietnamese diacritics in XAML only. Dynamic parts set from code without Vietnamese literals -->
@@ -55,21 +47,8 @@
                     </StackPanel>
                 </StackPanel>
 
-                <!-- Thời gian -->
-                <Border Grid.Column="1" Background="#E8F4F8" Padding="20,12" CornerRadius="10" Margin="0,0,15,0">
-                    <StackPanel>
-                        <!-- Separate emoji run from Vietnamese text -->
-                        <TextBlock FontFamily="Segoe UI" FontSize="11" Foreground="#7F8C8D" HorizontalAlignment="Center">
-                            <Run FontFamily="Segoe UI Emoji" Text="&#x23F1;"/>
-                            <Run Text=" Thời gian"/>
-                        </TextBlock>
-                        <TextBlock x:Name="txtTimer" Text="60s" FontSize="28" FontWeight="Bold"
-                                   Foreground="#3498DB" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
-
                 <!-- Quay lại -->
-                <Button x:Name="btnBack" Grid.Column="2" Padding="20,12" Background="#95A5A6" Foreground="White"
+                <Button x:Name="btnBack" Grid.Column="1" Padding="20,12" Background="#95A5A6" Foreground="White"
                         BorderThickness="0" FontSize="13" FontWeight="SemiBold"
                         Cursor="Hand" Click="BtnBack_Click">
                     <!-- Use TextBlock with Runs so Vietnamese part uses Segoe UI, icon uses emoji font -->
@@ -100,11 +79,6 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Border Background="#FFF4E6" Width="36" Height="36" CornerRadius="8" Margin="0,0,10,0">
-                            <Grid>
-                      
-                            </Grid>
-                        </Border>
                         <TextBlock Text="Chọn bộ thẻ" FontSize="16" FontWeight="Bold"
                                    Foreground="#2C3E50" VerticalAlignment="Center"/>
                     </StackPanel>
@@ -166,7 +140,6 @@
                     <StackPanel Grid.Row="0" HorizontalAlignment="Center">
                         <TextBlock x:Name="txtInitialMessage" Text="Vui lòng chọn bộ thẻ và bấm 'Bắt đầu'" Foreground="#7F8C8D"/>
                         <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                            <TextBlock x:Name="txtProgress" Text="Tiến độ: 0 / 0" Margin="0,0,10,0"/>
                             <ProgressBar x:Name="progressBar" Width="200" Height="10"/>
                         </StackPanel>
                     </StackPanel>
