@@ -138,9 +138,8 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" HorizontalAlignment="Center">
-                        <TextBlock x:Name="txtInitialMessage" Text="Vui lòng chọn bộ thẻ và bấm 'Bắt đầu'" Foreground="#7F8C8D"/>
                         <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                            <ProgressBar x:Name="progressBar" Width="200" Height="10"/>
+                            <!-- Removed txtProgress TextBlock as requested; keep ProgressBar only -->
                         </StackPanel>
                     </StackPanel>
 
@@ -186,10 +185,15 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel>
                     <TextBlock x:Name="txtResult" FontSize="16" FontWeight="Bold" Foreground="White">
-                        <Run FontFamily="Segoe UI Emoji" Text="&#x1F389;"/>
-                        <Run Text=" Hoàn thành!"/>
+                        <Run x:Name="runResultLabel" Text=" Hoàn thành!"/>
+                        <Run x:Name="runResultScoreInline" Text=""/>
                     </TextBlock>
-                    <TextBlock x:Name="txtResultDetail" Foreground="#E8F8F5"/>
+                    <TextBlock x:Name="txtResultDetail" Foreground="#E8F8F5">
+                        <Run Text="Thời gian: "/>
+                        <Run x:Name="runElapsed" Text="0s"/>
+                        <Run Text=" | Lượt thử: "/>
+                        <Run x:Name="runAttempts" Text="0"/>
+                    </TextBlock>
                 </StackPanel>
                 <TextBlock Grid.Column="1" x:Name="txtScore" FontSize="20"
                            FontWeight="Bold" Foreground="White"/>

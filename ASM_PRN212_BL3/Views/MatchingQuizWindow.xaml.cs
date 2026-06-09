@@ -370,9 +370,22 @@ namespace ASM_PRN212_BL3.Views
             var elapsed = DateTime.Now - _startTime;
             var score = CalculateScore(elapsed, _attempts);
 
-            txtResult.Text = $"Hoàn thành! ?i?m: {score:F1}";
-            txtResultDetail.Text = $"Th?i gian: {elapsed.TotalSeconds:F1}s | L??t th?: {_attempts}";
-            txtScore.Text = score.ToString("F1");
+            // Avoid writing Vietnamese literals from code to prevent encoding issues.
+            // Update numeric runs defined in XAML which keep correct diacritics.
+            try
+            {
+                runResultScoreInline.Text = $" {score:F1}"; // appended to the existing Vietnamese run
+                runElapsed.Text = $"{elapsed.TotalSeconds:F1}s";
+                runAttempts.Text = _attempts.ToString();
+                txtScore.Text = score.ToString("F1");
+            }
+            catch
+            {
+                // Fallback: set plain texts (ASCII-friendly) if runs not available
+                txtResult.Text = $"Completed: {score:F1}";
+                txtResultDetail.Text = $"Time: {elapsed.TotalSeconds:F1}s | Attempts: {_attempts}";
+                txtScore.Text = score.ToString("F1");
+            }
 
             pnlResult.Visibility = Visibility.Visible;
         }
